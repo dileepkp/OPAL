@@ -1,0 +1,16 @@
+'dummy cfg exit false' file0:785_3_786_61_exit
+'dummy cfg exit true' file0:785_3_786_61_exit
+
+file0:785_3_786_61_exit file0:787_8_787_13
+
+
+'dummy cfg exit false' file0:787_3_788_29_exit
+'dummy cfg exit true' file0:787_3_788_29_exit
+
+
+
+file0:795_31_795_45 file0:795_19_795_108_exit 'false' -- 64
+
+file0:795_19_795_108_exit file0:795_7_796_92_exit -- 64
+file0:796_24_796_38 file0:796_12_796_92_exit -- 64
+797--EXPECTED 128

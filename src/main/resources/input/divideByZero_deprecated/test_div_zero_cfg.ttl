@@ -1,0 +1,66 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix file0: <ftp:/home/demo/pato/tools/onto-build-rose/test/test_div_zero.c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+file0:3_15_3_15 pa:beginExecutionInFunction file0:3_18_7_1 .
+file0:3_15_3_15 pa:firstStatementInFunction file0:3_18_7_1 .
+file0:3_15_3_15 pa:nextStatement file0:4_2_4_6 .
+file0:5_3_6_14 pa:nextTrueStatement file0:6_5_6_14 .
+file0:5_3_6_14_exit c:hasParent file0:5_3_6_14 .
+file0:6_5_6_14 pa:nextStatement file0:5_3_6_14_exit .
+file0:5_3_6_14_exit c:hasParent file0:5_3_6_14 .
+file0:5_3_6_14 pa:nextFalseStatement file0:5_3_6_14_exit .
+file0:4_2_4_6 pa:nextStatement file0:5_3_6_14 .
+file0:5_3_6_14_exit c:hasParent file0:5_3_6_14 .
+
+
+file0:5_3_6_14_exit pa:endExecutionInFunction file0:3_18_7_1 .
+
+
+file0:10_3_10_7 pa:beginExecutionInFunction file0:9_14_12_1 .
+file0:10_3_10_7 pa:firstStatementInFunction file0:9_14_12_1 .
+file0:10_3_10_7 pa:nextStatement file0:11_3_11_7 .
+
+
+file0:11_3_11_7 pa:endExecutionInFunction file0:9_14_12_1 .
+file0:15_3_15_27 pa:nextTrueStatement file0:15_15_15_27 .
+file0:14_23_17_1_exit c:hasParent file0:14_23_17_1 .
+file0:15_3_15_27_exit c:hasParent file0:15_3_15_27 .
+file0:14_23_17_1_exit pa:nextStatement file0:15_3_15_27_exit .
+file0:15_3_15_27_exit c:hasParent file0:15_3_15_27 .
+file0:15_3_15_27 pa:nextFalseStatement file0:15_3_15_27_exit .
+
+
+file0:14_20_14_20 pa:beginExecutionInFunction file0:14_23_17_1 .
+file0:14_20_14_20 pa:firstStatementInFunction file0:14_23_17_1 .
+file0:14_20_14_20 pa:nextStatement file0:15_3_15_27 .
+file0:15_3_15_27_exit c:hasParent file0:15_3_15_27 .
+file0:15_3_15_27_exit pa:nextStatement file0:16_3_16_11 .
+file0:14_23_17_1_exit c:hasParent file0:14_23_17_1 .
+
+
+file0:14_23_17_1_exit pa:endExecutionInFunction file0:14_23_17_1 .
+
+
+file0:20_21_20_22 pa:beginExecutionInFunction file0:20_26_30_1 .
+file0:20_21_20_22 pa:firstStatementInFunction file0:20_26_30_1 .
+file0:20_21_20_22 pa:nextStatement file0:21_3_21_7 .
+file0:21_3_21_7 pa:nextStatement file0:21_3_21_10 .
+file0:21_3_21_10 pa:nextStatement file0:21_3_21_13 .
+file0:21_3_21_13 pa:nextStatement file0:23_3_23_13 .
+file0:24_11_24_16 pa:nextTrueStatement file0:25_5_25_22 .
+file0:24_3_26_3_exit c:hasParent file0:24_3_26_3 .
+file0:24_11_24_16 pa:nextFalseStatement file0:24_3_26_3_exit .
+file0:25_5_25_22 pa:nextStatement file0:24_11_24_16 .
+file0:25_5_25_22 pa:lastStatementInLoop file0:24_11_24_16 .
+file0:23_3_23_13 pa:nextStatement file0:24_11_24_16 .
+file0:24_3_26_3_exit c:hasParent file0:24_3_26_3 .
+file0:24_3_26_3_exit pa:nextStatement file0:28_3_28_22 .
+file0:20_26_30_1_exit c:hasParent file0:20_26_30_1 .
+
+
+file0:20_26_30_1_exit pa:endExecutionInFunction file0:20_26_30_1 .

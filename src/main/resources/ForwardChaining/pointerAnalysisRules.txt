@@ -1,0 +1,309 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix fl: <http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#> .
+
+
+###############################################################################################################################
+################################ Pointer Analysis Rules ############################################################
+
+#A pointer variable usage with assignment to &x, a pointer
+#A pointer variable declaration without assignment 
+#A pointer variable declaration with initilization to &x, a pointer
+
+#A pointer variable declaration with initilization to function call (done in functionRules.txt)
+#A pointer variable usage with assignment to function call (done in functionRules.txt)
+
+############################################################################################################################
+################################ data type rules #############################################################################
+
+[rule:
+		(?var c:hasType c:pointer_type)
+		(?var c:hasBaseType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+->
+		(?var pa:dataType pa:validPointerType)	
+]
+
+[rule:
+		(?var c:hasType c:pointer_type)
+		(?var c:hasBaseType c:_IO_FILE)
+
+->
+		(?var pa:dataType pa:validPointerType)	
+]
+
+############################################################################################################################
+################################ lvalue  and rvalue rules ##################################################################
+
+
+[rule:
+		(?vardecl rdf:type c:VariableDecl)
+		(?vardecl c:hasInitializer ?initializer)
+		(?vardecl pa:dataType pa:validPointerType)	
+		(?initializer rdf:type c:AssignInitializer)
+		(?initializer c:hasInitialValue ?right)
+->
+		(2 pa:varDecl lvaluePointerDecl(?vardecl,?right))
+		( 2 2 subExpression(?vardecl,?right))
+
+]
+
+[rule:
+		(?st rdf:type c:ExpressionStatement),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+->
+		( 2 2 subExpression(?st,?left))
+		( 2 2 subExpression(?st,?right))
+]
+
+
+[rule:
+
+		( 2 2 subExpression(?st,?left))
+		(?left rdf:type c:IndirectionOp)
+		(?left c:hasOperand ?operand)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+		(?var pa:dataType pa:validPointerType)	
+->
+
+		(2 pa:varUsage subExpressionDereferencedPointer(?st,?left, ?var))
+
+]
+
+
+[rule:
+
+		( 2 2 subExpression(?st,?left))
+		(?left rdf:type c:VariableRef)
+		(?left c:referTo ?var)
+		(?var pa:dataType pa:validPointerType)	
+->
+
+		(2 pa:varUsage subExpressionPointer(?st,?left,?var))
+
+]
+
+[rule:
+		( 2 2 subExpression(?st,?right))
+		(?right rdf:type c:AddressOp)
+		(?right c:hasOperand ?operand)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+->
+		(2 pa:varUsage subExpressionAddressOp(?st, ?right,?var))
+]
+
+############################################################################################################################
+################################ pointsTo var-usage rules ################################################################
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+
+		(2 pa:varUsage subExpressionPointer(?st,?left,?lvar))
+		(2 pa:varUsage subExpressionAddressOp(?st,?right, ?rvar))
+		
+		(?rvar pa:hasAddress ?address)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 makeFilePS(?lvar , ?pp, ?cond,?address,pa:equals,?rvar))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?lvar,?iter,?iter)),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+
+		(2 pa:varUsage subExpressionDereferencedPointer(?st,?left, ?lvar))
+		(2 pa:varUsage subExpressionPointer(?st,?right,?rvar))
+		
+		(?rvar pa:hasAddress ?address)
+	
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 makeFilePS(?lvar , ?pp, ?cond,?address,pa:equals,?rvar))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?lvar,?iter,?iter)),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+
+]
+
+
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+
+		(2 pa:varUsage subExpressionPointer(?st,?left,?lvar))
+		(2 pa:varUsage subExpressionDereferencedPointer(?st,?right, ?rvar))
+
+		(?rvar pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?ps2 pa:stateValue ?stateVal),
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+
+		(?var pa:hasAddress ?stateVal)
+		(?var pa:hasPointerState ?ps3)
+		(?ps3 pa:pointsToResource ?resource)
+		(?ps3 pa:stateValue ?stateVal3),
+		(?ps3 pa:stateRelation ?stateRel3),
+		(?ps3 pa:atProgramPoint ?prevPP)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 makeFilePS(?lvar , ?pp, ?cond,?stateVal3,?stateRel3,?resource))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?lvar,?iter,?iter)),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+
+]
+
+
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+
+		(2 pa:varUsage subExpressionPointer(?st,?left,?lvar))
+		(2 pa:varUsage subExpressionPointer(?st,?right, ?rvar))
+
+		(?rvar pa:hasPointerState ?ps2)
+		(?ps2 pa:pointsToResource ?resource)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?ps2 pa:stateValue ?stateVal),
+		(?ps2 pa:stateRelation ?stateRel),
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 makeFilePS(?lvar , ?pp, ?cond,?stateVal,?stateRel,?resource))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?lvar,?iter,?iter)),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+
+
+]
+
+
+
+############################################################################################################################
+################################ pointsTo var-declaration rules ################################################################
+
+[rule:
+		(1 1 execute(?prev,?vardecl,?cond,?pp))
+		(?vardecl rdf:type c:VariableDecl)
+		(2 pa:varDecl lvaluePointerDecl(?vardecl,?right))
+		(2 pa:varUsage subExpressionAddressOp(?vardecl, ?right,?rVar))
+
+		(?rvar pa:hasAddress ?address)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 updateVarList(?vardecl,?baseConditions,?cond))
+		(1 1 makeFilePS(?vardecl , ?pp, ?cond,?address,pa:equals,?rvar))
+		(1 1 updateOtherVar(?prev,?vardecl,?cond,?pp,?vardecl,?iter,?iter)),
+		(1 1 completed(?vardecl,?cond,?iter,?baseConditions))
+
+
+]
+
+[rule:
+		(1 1 execute(?prev,?vardecl,?cond,?pp))
+		(?vardecl rdf:type c:VariableDecl)
+		(2 pa:varDecl lvaluePointerDecl(?vardecl,?right))
+		(2 pa:varUsage subExpressionDereferencedPointer(?vardecl,?right, ?rvar))
+
+		(?rvar pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?ps2 pa:stateValue ?stateVal),
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+
+		(?var pa:hasAddress ?stateVal)
+		(?var pa:hasPointerState ?ps3)
+		(?ps3 pa:pointsToResource ?resource)
+		(?ps3 pa:stateValue ?stateVal3),
+		(?ps3 pa:stateRelation ?stateRel3),
+		(?ps3 pa:atProgramPoint ?prevPP)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+
+		(1 1 updateVarList(?vardecl,?baseConditions,?cond))
+		(1 1 makeFilePS(?vardecl , ?pp, ?cond,?stateVal3,?stateRel3,?resource))
+		(1 1 updateOtherVar(?prev,?vardecl,?cond,?pp,?vardecl,?iter,?iter)),
+		(1 1 completed(?vardecl,?cond,?iter,?baseConditions))
+
+
+]
+
+[rule:
+		(1 1 execute(?prev,?vardecl,?cond,?pp))
+		(?vardecl rdf:type c:VariableDecl)
+		(2 pa:varDecl lvaluePointerDecl(?vardecl,?right))
+		(2 pa:varUsage subExpressionPointer(?vardecl,?right,?rvar))
+
+		(?rvar pa:hasPointerState ?ps2)
+		(?ps2 pa:pointsToResource ?resource)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?ps2 pa:stateValue ?stateVal),
+		(?ps2 pa:stateRelation ?stateRel),
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+
+		(1 1 updateVarList(?vardecl,?baseConditions,?cond))
+		(1 1 makeFilePS(?vardecl , ?pp, ?cond,?stateVal,?stateRel,?resource))
+		(1 1 updateOtherVar(?prev,?vardecl,?cond,?pp,?vardecl,?iter,?iter)),
+		(1 1 completed(?vardecl,?cond,?iter,?baseConditions))
+
+
+]
+
+
+#A pointer variable declaration without assignment
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:Variable),
+		(?st pa:dataType pa:validPointerType)
+		(?pp pa:baseConditions ?baseConditions)
+		(?pp pa:iteration ?iter)
+->
+		remove(0)
+		(1 1 updateVarList(?st,?baseConditions,?cond))
+		(1 1 makePS2(?st , ?pp, ?cond,pa:unknown,pa:equals))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?st,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		print('var decl without assignment', ?st)
+
+
+]
+
+
+

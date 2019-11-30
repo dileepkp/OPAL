@@ -1,0 +1,376 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix fl: <http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#> .
+
+
+##################################################################################################################################
+################################ Skip rules for Variable Declarations ############################################################
+
+
+# skip not int i; not file *fp;
+[analyzeFirstStatement2:
+		(1 1 execute(?prev,?st,?cond,?pp))
+		(?st rdf:type c:Variable),
+		(?st c:hasType ?dt)
+		noValue(?st,c:hasInitializer),
+
+		noValue(?st, c:hasBaseType, c:_IO_FILE)
+		(?pp pa:baseConditions ?baseConditions)
+		(?pp pa:iteration ?iter)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		noValue(?intDataTypeList, rdf:item, ?dt)
+
+
+
+
+#		listLength(?cond, ?len)
+#		listEntry(?cond, ?index, 'true')
+->
+#		print('length:',?len)
+#		print('list item',?index)
+#		print('skip not int i; not file *fp;')
+	
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+# skip not int i=0;not FILE *fp=...
+[assign1:
+		(1 1 execute(?prev,?vardecl,?cond,?pp))
+		(?vardecl rdf:type c:VariableDecl)
+		(?vardecl c:hasInitializer ?assign)
+		(?vardecl c:hasType ?dt)
+		
+		noValue(?vardecl, c:hasBaseType, c:_IO_FILE)
+		(?assign rdf:type c:AssignInitializer)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		noValue(?intDataTypeList, rdf:item, ?dt)
+
+
+#		(?assign c:hasInitialValue ?operand)
+#		(?operand c:hasOperand ?value)
+#		(?value rdf:type c:Value)
+#		(?value c:hasValue ?concreteVal)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+#		makeTemp(?ps)
+		
+#		(?intDataTypeList rdf:type pa:intDataTypeList)
+#		(?intDataTypeList rdf:item ?dt)
+
+->
+#		(1 1 updateVarList(?vardecl,?baseConditions,?cond))
+#		(?vardecl pa:hasPointerState ?ps),
+#		(?ps pa:atProgramPoint ?pp),
+#		(?ps pa:stateValue ?concreteVal),
+#		(?ps pa:stateRelation pa:equals),
+
+#		print('skip not i=0;not fp=...'),		
+		(1 1 completed(?vardecl,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?vardecl,?cond,?pp,1,?iter,?iter))
+
+]
+
+
+# skip Assignment Statement i = 0 ; i not int and file
+[forInitStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+#		noValue(?var, c:hasType, c:int)
+#		noValue(?var, c:hasType, c:long_long)
+#		noValue(?var, c:hasType, c:long)
+#		noValue(?var, c:hasType, c:unsigned_long)
+#		noValue(?var, c:hasType, c:unsigned_int)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		noValue(?intDataTypeList, rdf:item, ?dt)
+
+		noValue(?var, c:hasBaseType, c:_IO_FILE)
+
+#		(?right c:hasOperand ?val),
+#		(?val rdf:type c:Value),
+#		(?val c:hasValue ?concreteVal),
+#		(?val c:hasType c:int),
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+#		makeTemp(?ps)
+
+#		(?intDataTypeList rdf:type pa:intDataTypeList)
+#		(?intDataTypeList rdf:item ?dt)
+
+#		(?varList rdf:type pa:varList),		
+#		noValue(?varList, rdf:item, ?var),
+#		(?varList pa:baseConditions ?baseConditions)
+#		(?varList pa:inPath ?cond)
+		
+->
+#		(?var pa:hasPointerState ?ps),
+#		(?ps pa:atProgramPoint ?pp),
+#		print(' skip Assignment Statement i = 0 ; i not int and file ',?st),
+#		(?ps pa:stateValue ?concreteVal),
+#		(?ps pa:stateRelation  pa:equals),
+		
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+
+# skip ch = func(...) 
+# ch not int; ch not file; func not in file library
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?func )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		noValue(?intDataTypeList, rdf:item, ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?fileLibrary, pa:hasFunction, ?funcName)		
+		(?fileLibrary rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ', 'st', ?st),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# skip ch = func(...) 
+# ch int; ch not file; func not in file library
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?func )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?fileLibrary, pa:hasFunction, ?funcName)		
+		(?fileLibrary rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ch type int', 'st', ?st),
+		(1 1 makePS2(?var, ?pp, ?cond,"-32000"^^xsd:integer,pa:greaterEqual))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# skip ch = func(...) 
+# ch int; ch not file; func not in file library; func has cast
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?right )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?right c:hasOperand ?func)
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?fileLibrary, pa:hasFunction, ?funcName)		
+		(?fileLibrary rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ch type int,func has cast', 'st', ?st),
+		(1 1 makePS2(?var, ?pp, ?cond,pa:unknown, pa:equals))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# Skip IP call with no parameters; func()
+[SkipIPCall:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?func),		
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		
+		noValue(?fileLibrary, pa:hasFunction, ?funcName)		
+		(?fileLibrary rdf:type pa:FileLibrary)
+
+		(?func c:hasArgumentExpr ?y),
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		
+->
+#		print('Skip IP call- not file type -no assignment - no parameters file type', ?exp),
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?exp,?cond,?iter,?baseConditions))
+]
+
+
+# Assignment Statement i += j
+[AddAssignOpStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type ?opType),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?right c:referTo ?var2),
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+		(c:ArithmeticAssignOp rdf:item ?opType)
+
+->
+		
+#		print('AddAssignOp Statement type i += j'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+
+# Arithmetic Statement i = 1/j
+[arithmeticStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?left c:hasType ?dt)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?right rdf:type ?arithOp)
+#		(?right c:hasLeftOperand ?right_left)
+#		(?right c:hasRightOperand ?right_right)
+#		(?right_left rdf:type c:Value)
+#		(?right_right rdf:type c:VariableRef)
+#		(?right_right c:referTo ?var2)
+
+		(?arithmeticOp rdf:type pa:arithmeticOperators)
+		(?arithmeticOp rdf:item ?arithOp)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+	
+->
+	
+#		print('Arithmetic Statement type i = 1/j;'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+[arrayVariableAssignment:
+		(1 1 execute(?prev,?st,?cond,?pp))
+		(?st rdf:type c:ExpressionStatement)
+		(?st c:hasExpression ?expr)
+		(?expr rdf:type c:AssignOp)
+		(?expr c:hasLeftOperand ?left)
+		(?left rdf:type c:ArraySub)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+#		print('arrayVariableAssignment')
+]
+
+[switchStatement:
+		(1 1 execute(?prev,?st,?cond,?pp))
+		(?st rdf:type c:SwitchStatement)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+#		print('switchStatement')
+]
+
+
+# Assignment Statement i = j; i indirectionop type
+[forInitStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left rdf:type c:IndirectionOp)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		
+#		print('Assignment Statement i = j; i indirectionop type '),
+#		(1 1 makePS2(?var , ?pp, ?cond,?concreteVal,pa:equals))
+
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+

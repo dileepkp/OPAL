@@ -1,0 +1,75 @@
+
+
+# Analyze For statement
+[WhileStatement1:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement),
+		(?st c:hasParent ?forSt),
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		noValue(?forSt, pa:iteration)
+		(?forSt c:hasCondition ?st)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 createNoConditionList(?st,?cond,?st,?iter,?baseConditions,?forSt))		
+		(1 1 createYesConditionList2(?st,?cond,?st,1,?baseConditions,?prev,?pp))
+		(?forSt pa:previousIterationIndex_0 ?iter)
+	
+#		(?forSt pa:iteration 1)
+		print('while st1')
+]
+
+# Analyze For statement.
+[WhileStatement2:
+		(1 1 execute2(?prev,?st,?cond,?pp,?newI))
+		(?st rdf:type c:ExpressionStatement)
+		(?st c:hasParent ?forSt)
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		(?forSt c:hasCondition ?st)
+		ge(?newI,2)
+		le(?newI,3)
+#		equal(?newI,2)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1))
+		(1 1 createYesConditionList2(?st,?cond,?st,?newI,?baseConditions,?prev,?pp))
+#		(?forSt pa:iteration ?newI)
+
+		(?forSt pa:previousIterationIndex_1 ?iter)
+#		(1 1 createNoConditionList(?st,?cond,?exp,?iter,?baseConditions))
+		print('while st2')
+]
+
+# Analyze For statement.
+[WhileStatement3:
+		(1 1 execute2(?prev,?st,?cond,?pp,?newI)),
+		(?st rdf:type c:ExpressionStatement),
+		(?st c:hasParent ?forSt),
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		(?forSt c:hasCondition ?st)
+
+		equal(?newI,4)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		(?forSt pa:iteration 4)
+#		(1 1 completed(?forSt,?cond))
+#		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1)),
+#		(1 1 createYesConditionList(?st,?cond,?exp,?iter)),
+		(1 1 createNoConditionList2(?st,?cond,?st,?newI,?baseConditions,?prev,?pp,?forSt))
+#		(?forSt pa:totalIterations ?iter)
+		print('while st3')
+]
+
+
+

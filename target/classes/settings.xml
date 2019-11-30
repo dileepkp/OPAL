@@ -1,0 +1,546 @@
+<?xml version="1.0"?>
+<inputs>
+
+ <queryFile id="count">src/main/resources/analysis/count.ttl</queryFile> 
+ <queryFile id="canloop">src/main/resources/analysis/canonicalLoopAnalysis.ttl</queryFile> 
+ <queryFile id="divzero">src/main/resources/analysis/divideByZeroAnalysis.ttl</queryFile> 
+ <queryFile id="forloopcount">src/main/resources/analysis/fclosecount.ttl</queryFile> 
+  <queryFile id="forinit">src/main/resources/analysis/readableForInitAnalysis.ttl</queryFile>
+  <queryFile id="lva">src/main/resources/analysis/liveVariables.ttl</queryFile>
+
+    <inputgroup>
+
+   <input id="bt">
+        <dataFile>src/main/resources/input/nas/rose_bt_single.ttl</dataFile>
+	<cfgFile>src/main/resources/input/nas/rose_bt_single_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/nas/bt_single.c</prefix>
+    </input>
+   
+ <input id="ep">
+        <dataFile>src/main/resources/input/nas/rose_ep_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_ep_single.c</prefix>
+    </input>
+ <input id="ft">
+        <dataFile>src/main/resources/input/nas/rose_ft_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_ft_single.c</prefix>
+    </input>
+  <input id="is">
+        <dataFile>src/main/resources/input/nas/rose_is_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_is_single.c</prefix>
+    </input>
+  <input id="lu">
+        <dataFile>src/main/resources/input/nas/rose_lu_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_lu_single.c</prefix>
+    </input>
+ <input id="cg">
+        <dataFile>src/main/resources/input/nas/rose_cg_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_cg_single.c</prefix>
+    </input>
+
+    <input id="mg">
+        <dataFile>src/main/resources/input/nas/rose_mg_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_mg_single.c</prefix>
+    </input>
+    <input id="sp">
+        <dataFile>src/main/resources/input/nas/rose_sp_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_sp_single.c</prefix>
+    </input>
+  
+<!--   <input id="lu+sp">
+        <dataFile>src/main/resources/input/nas/rose_lu+sp.ttl</dataFile>
+    </input>
+   <input id="lu+sp+mg+cg">
+        <dataFile>src/main/resources/input/nas/rose_lu+sp+mg+cg.ttl</dataFile>
+    </input>
+
+ <input id="canloop_leaky_bucket">
+        <dataFile>src/main/resources/input/stream/leaky_bucket.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/leaky_bucket_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/leaky_bucket.c</prefix>
+    </input>
+
+  <input id="canloop_feat">
+        <dataFile>src/main/resources/input/stream/feat_modified.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+<input id="canloop_feat2">
+        <dataFile>src/main/resources/input/stream/feat_modified2.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified2_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+ <input id="canloop_iv_io">
+        <dataFile>src/main/resources/input/stream/IV_IO.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/IV_IO_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/IV_IO.c</prefix>
+    </input>
+
+	<input id="canloop_profile">
+        <dataFile>src/main/resources/input/stream/profile.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/profile_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/profile.c</prefix>
+    </input>
+-->
+    <input id="nas1">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop1.ttl</dataFile>
+    </input>
+    <input id="nas10">
+        <dataFile>/home/aidb/nas-synthetic/synthetic2_loop10.ttl</dataFile>
+    </input>
+    <input id="nas20">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop20.ttl</dataFile>
+    </input>
+    <input id="nas40">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop40.ttl</dataFile>
+    </input>
+    <input id="nas60">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop60.ttl</dataFile>
+    </input>
+    <input id="nas80">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop80.ttl</dataFile>
+    </input>
+    <input id="nas100">
+        <dataFile>/home/aidb/nas-synthetic/synthetic_loop100.ttl</dataFile>
+    </input>
+
+ <input id="syn3_nas1">
+        <dataFile>/home/aidb/nas-synthetic/synthetic3_loop1.ttl</dataFile>
+     <!--   <cfgFile>/home/aidb/nas-synthetic/synthetic3_loop1_cfg.ttl</cfgFile> -->
+    </input>
+    <input id="syn3_nas10">
+        <dataFile>/home/aidb/nas-synthetic/synthetic3_loop10.ttl</dataFile>
+    </input>
+    <input id="syn3_nas20">
+        <dataFile>/home/aidb/nas-synthetic/synthetic3_loop20.ttl</dataFile>
+    </input>
+    <input id="syn3_nas40">
+        <dataFile>/home/aidb/nas-synthetic/synthetic3_loop40.ttl</dataFile>
+    </input>
+    <input id="syn3_nas60">
+        <dataFile>/home/aidb/nas-synthetic/synthetic3_loop60.ttl</dataFile>
+    </input>
+
+<!--syn2 files are used for live variable analysis -->
+<input id="syn2_nas1">
+        <dataFile>/home/aidb/nas-synthetic/synthetic2_loop1.ttl</dataFile>
+        <cfgFile>/home/aidb/nas-synthetic/synthetic2_loop1_cfg.ttl</cfgFile>
+    </input>
+
+     </inputgroup>
+
+    <inputgroup>
+  <queryFile>src/main/resources/input/rdf3x/query_lu_formatted.sparql</queryFile>
+
+    <input id="rdf3x_ep">
+        <dataFile>src/main/resources/input/rdf3x/rose_ep_single.ttl</dataFile>
+    </input>
+    <input id="rdf3x_mg">
+        <dataFile>src/main/resources/input/rdf3x/rose_mg_single.ttl</dataFile>
+    </input>
+    <input id="rdf3x_sp">
+        <dataFile>src/main/resources/input/rdf3x/rose_sp_single.ttl</dataFile>
+    </input>
+    <input id="rdf3x_lu">
+        <dataFile>src/main/resources/input/rdf3x/rose_lu_single.ttl</dataFile>
+    </input>
+<!--
+ <input id="rdf3x_profile">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_profile.ttl</dataFile>
+    </input>
+<input id="rdf3x_iv_io">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_iv_io.ttl</dataFile>
+    </input>
+<input id="rdf3x_feat">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_feat.ttl</dataFile>
+    </input>
+<input id="rdf3x_leaky_bucket">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_leaky_bucket.ttl</dataFile>
+    </input>
+ -->
+     </inputgroup>
+
+
+    <inputgroup>
+  <queryFile>src/main/resources/input/rdf3x/query_cg.sparql</queryFile>
+    <input id="rdf3x_cg">
+        <dataFile>src/main/resources/input/rdf3x/rose_cg_single.ttl</dataFile>
+    </input>
+<input id="rdf3x_bt">
+        <dataFile>src/main/resources/input/rdf3x/rose_bt_single.ttl</dataFile>
+    </input>
+<input id="rdf3x_ep">
+        <dataFile>src/main/resources/input/rdf3x/rose_ep_single.ttl</dataFile>
+    </input>
+ <input id="rdf3x_ft">
+        <dataFile>src/main/resources/input/rdf3x/rose_ft_single.ttl</dataFile>
+    </input>
+ <input id="rdf3x_is">
+        <dataFile>src/main/resources/input/rdf3x/rose_is_single.ttl</dataFile>
+    </input>
+
+     </inputgroup>
+
+ <inputgroup>
+  <queryFile>src/main/resources/input/rdf3x/query_loop.sparql</queryFile>
+    <input id="rdf3x_cg">
+        <dataFile>src/main/resources/input/rdf3x/rose_cg_single.ttl</dataFile>
+    </input>
+<input id="rdf3x_profile1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_profile.ttl</dataFile>
+    </input>
+<input id="rdf3x_iv_io1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_iv_io.ttl</dataFile>
+    </input>
+<input id="rdf3x_feat1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_feat.ttl</dataFile>
+    </input>
+<input id="rdf3x_leaky_bucket1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_leaky_bucket.ttl</dataFile>
+    </input>
+<input id="rdf3x_sgfnode1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_sgfnode.ttl</dataFile>
+    </input>
+<input id="rdf3x_utilities1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_utilities_iohb.ttl</dataFile>
+    </input>
+<input id="rdf3x_frontmtx1">
+        <dataFile>src/main/resources/input/rdf3x/rdf3x_frontmtx_io.ttl</dataFile>
+    </input>
+ 
+     </inputgroup>
+
+<inputgroup>
+  <queryFile>src/main/resources/input/rdf3x/query_loop.sparql</queryFile>
+    <input id="rdf3x_loop">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop.ttl</dataFile>
+    </input>
+ <input id="rdf3x_loop1">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop1.ttl</dataFile>
+    </input>
+ <input id="rdf3x_loop10">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop10.ttl</dataFile>
+    </input>
+ <input id="rdf3x_loop20">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop20.ttl</dataFile>
+    </input>
+ <input id="rdf3x_loop40">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop40.ttl</dataFile>
+    </input>
+ <input id="rdf3x_loop60">
+        <dataFile>/home/aidb/nas-synthetic/rdf3x_loop60.ttl</dataFile>
+    </input>
+     </inputgroup>
+
+
+  <queryFile id="fclose">src/main/resources/analysis/fcloseAnalysis.ttl</queryFile>
+  <queryFile id="a1">src/main/resources/analysis/fopenPrecedesFclose.ttl</queryFile>
+  <queryFile id="a2">src/main/resources/analysis/fcloseFollowsFopen.ttl</queryFile>
+  <queryFile id="a3">src/main/resources/analysis/fopenPrecedesFread.ttl</queryFile>
+  <queryFile id="a4">src/main/resources/analysis/freadFollowsFopen.ttl</queryFile>
+  <queryFile id="a5">src/main/resources/analysis/freadPrecedesFclose.ttl</queryFile>
+  <queryFile id="a6">src/main/resources/analysis/fcloseFollowsFread.ttl</queryFile>
+  <queryFile id="a7">src/main/resources/analysis/doubleFopen.ttl</queryFile>
+  <queryFile id="a8">src/main/resources/analysis/doubleFclose.ttl</queryFile>
+
+ <inputgroup>
+
+<input id="testSameState">
+        <cFile>src/main/resources/input/stream/testSameState.c</cFile>
+        <dataFile>src/main/resources/input/stream/testSameState.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/testSameState_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/testSameState.c</prefix>
+    </input>
+
+    <input id="leaky_bucket">
+        <cFile>src/main/resources/input/stream/leaky_bucket.c</cFile>
+        <dataFile>src/main/resources/input/stream/leaky_bucket.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/leaky_bucket_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec/leaky_bucket.c</prefix>
+    </input>
+
+<input id="frontmtx">
+        <cFile>src/main/resources/input/stream/FrontMtx_IO.c</cFile>
+        <dataFile>src/main/resources/input/stream/FrontMtx_IO.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/FrontMtx_IO_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec454/spooles/FrontMtx/src/FrontMtx_IO.c</prefix>
+    </input>
+<input id="lencod">
+        <cFile>src/main/resources/input/stream/lencod.c</cFile>
+        <dataFile>src/main/resources/input/stream/lencod.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/lencod_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec464/lencod.c</prefix>
+    </input>
+
+<input id="sgfnode">
+        <cFile>src/main/resources/input/stream/sgfnode.c</cFile>
+        <dataFile>src/main/resources/input/stream/sgfnode.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/sgfnode_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec445/sgf/sgfnode.c</prefix>
+    </input>
+
+<input id="utilities">
+        <cFile>src/main/resources/input/stream/Utilities_iohb.c</cFile>
+        <dataFile>src/main/resources/input/stream/Utilities_iohb.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/Utilities_iohb_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec454/spooles/Utilities/src/Utilities_iohb.c</prefix>
+    </input>
+
+<input id="feat">
+        <cFile>src/main/resources/input/stream/feat.c</cFile>
+        <dataFile>src/main/resources/input/stream/feat.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec/feat.c</prefix>
+    </input>
+
+
+  <input id="feat_modified">
+        <dataFile>src/main/resources/input/stream/feat_modified.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+<input id="feat2_modified">
+        <dataFile>src/main/resources/input/stream/feat_modified2.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified2_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+ <input id="iv_io">
+        <cFile>src/main/resources/input/stream/IV_IO.c</cFile>
+        <dataFile>src/main/resources/input/stream/IV_IO.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/IV_IO_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/IV_IO.c</prefix>
+    </input>
+
+	<input id="profile">
+        <cFile>src/main/resources/input/stream/profile.c</cFile>
+        <dataFile>src/main/resources/input/stream/profile.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/profile_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/profile.c</prefix>
+    </input>
+
+  <input id="clang_stream">
+        <dataFile>src/main/resources/input/stream/simple_stream_checks.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/simple_stream_checks_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/simple_stream_checks.c</prefix>
+    </input>
+
+<input id="stream">
+        <dataFile>/home/aidb/stream-synthetic/synthetic_stream.ttl</dataFile>
+	<cfgFile>/home/aidb/stream-synthetic/synthetic_stream_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/synthetic_stream.c</prefix>
+    </input>
+
+  <input id="stream1">
+        <dataFile>/home/aidb/stream-synthetic/synthetic_stream1.ttl</dataFile>
+	<cfgFile>/home/aidb/stream-synthetic/synthetic_stream1_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/synthetic_stream1.c</prefix>
+    </input>
+
+ <input id="stream2">
+        <dataFile>/home/aidb/stream-synthetic/synthetic_stream2.ttl</dataFile>
+	<cfgFile>/home/aidb/stream-synthetic/synthetic_stream2_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/synthetic_stream2.c</prefix>
+    </input>
+    
+     </inputgroup>
+    
+ <inputgroup>
+  <queryFile>src/main/resources/analysis/readableForInitAnalysis.ttl</queryFile>
+    <input id="init1"> <!-- A in write up -->
+        <dataFile>src/main/resources/input/forinit/init1.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init1.c</prefix>
+    </input>
+
+    <input id="init2">
+        <dataFile>src/main/resources/input/forinit/init2.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init2.c</prefix>
+    </input>
+
+<input id="init3">
+        <dataFile>src/main/resources/input/forinit/init3.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init3.c</prefix>
+    </input>
+
+    <input id="init4"> <!-- B in write up -->
+        <dataFile>src/main/resources/input/forinit/init4.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init4.c</prefix>
+    </input>
+
+<input id="init5"> <!-- C in write up -->
+        <dataFile>src/main/resources/input/forinit/init5.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init5.c</prefix>
+    </input>
+
+    <input id="init6"> <!-- D in write up -->
+        <dataFile>src/main/resources/input/forinit/init6.ttl</dataFile>
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/forinit/init6.c</prefix>
+    </input>
+<!--
+<input id="init_leaky_bucket">
+        <dataFile>src/main/resources/input/stream/leaky_bucket.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/leaky_bucket_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/leaky_bucket.c</prefix>
+    </input>
+
+  <input id="init_feat">
+        <dataFile>src/main/resources/input/stream/feat_modified.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+<input id="init_feat2">
+        <dataFile>src/main/resources/input/stream/feat_modified2.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/feat_modified2_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/feat_modified.c</prefix>
+    </input>
+
+ <input id="init_iv_io">
+        <dataFile>src/main/resources/input/stream/IV_IO.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/IV_IO_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/IV_IO.c</prefix>
+    </input>
+
+	<input id="init_profile">
+        <dataFile>src/main/resources/input/stream/profile.ttl</dataFile>
+	<cfgFile>src/main/resources/input/stream/profile_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/spec/profile.c</prefix>
+    </input>
+-->
+ <input id="init_bt">
+        <dataFile>src/main/resources/input/nas/rose_bt_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_bt_single.c</prefix>
+    </input>
+ <input id="init_cg">
+        <dataFile>src/main/resources/input/nas/rose_cg_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_cg_single.c</prefix>
+    </input>
+
+    <input id="init_mg">
+        <dataFile>src/main/resources/input/nas/rose_mg_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_mg_single.c</prefix>
+    </input>
+    <input id="init_sp">
+        <dataFile>src/main/resources/input/nas/rose_sp_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_sp_single.c</prefix>
+    </input>
+
+<input id="init_lu">
+        <dataFile>src/main/resources/input/nas/rose_lu_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_lu_single.c</prefix>
+    </input>
+
+
+ <input id="init_ep">
+        <dataFile>src/main/resources/input/nas/rose_ep_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_ep_single.c</prefix>
+    </input>
+ <input id="init_ft">
+        <dataFile>src/main/resources/input/nas/rose_ft_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_ft_single.c</prefix>
+    </input>
+  <input id="init_is">
+        <dataFile>src/main/resources/input/nas/rose_is_single.ttl</dataFile>
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/nas/rose_is_single.c</prefix>
+    </input>
+
+     </inputgroup>
+
+      <inputgroup>
+
+<!--
+    <input id="divideByZero_clang">
+        <dataFile>src/main/resources/input/divideByZero/test_div_zero.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/test_div_zero_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/pato/tools/onto-build-rose/test/test_div_zero.c</prefix>
+    </input>
+
+  <input id="divideByZero_samate_fscanf">
+        <dataFile>src/main/resources/input/divideByZero/samate_fscanf.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/samate_fscanf_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_fscanf.c</prefix>
+    </input>
+
+<input id="divideByZero_samate_fgets">
+        <dataFile>src/main/resources/input/divideByZero/samate_fgets.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/samate_fgets_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_fgets.c</prefix>
+    </input>
+
+
+<input id="divideByZero_samate_rand">
+        <dataFile>src/main/resources/input/divideByZero/samate_rand.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/samate_rand_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_rand.c</prefix>
+    </input>
+
+ 
+ 
+<input id="divideByZero_samate_floatrand">
+        <dataFile>src/main/resources/input/divideByZero/samate_floatrand.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/samate_floatrand_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_floatrand.c</prefix>
+    </input>
+-->
+
+<input id="divideByZero_t1">
+        <cFile>src/main/resources/input/divideByZero/t1.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t1.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t1_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t1.c</prefix>
+    </input>
+
+<input id="divideByZero_t2">
+        <cFile>src/main/resources/input/divideByZero/t2.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t2.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t2_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t2.c</prefix>
+    </input>
+
+<input id="divideByZero_t3">
+        <cFile>src/main/resources/input/divideByZero/t3.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t3.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t3_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t3.c</prefix>
+    </input>
+
+<input id="divideByZero_t4">
+        <cFile>src/main/resources/input/divideByZero/t4.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t4.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t4_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t4.c</prefix>
+    </input>
+
+<input id="divideByZero_t5">
+        <cFile>src/main/resources/input/divideByZero/t5.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t5.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t5_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t5.c</prefix>
+    </input>
+
+<input id="divideByZero_t6">
+        <cFile>src/main/resources/input/divideByZero/t6.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t6.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t6_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t6.c</prefix>
+    </input>
+
+<input id="divideByZero_t7">
+        <cFile>src/main/resources/input/divideByZero/t7.c</cFile>
+        <dataFile>src/main/resources/input/divideByZero/t7.ttl</dataFile>
+	<cfgFile>src/main/resources/input/divideByZero/t7_cfg.ttl</cfgFile> 
+	<prefix>ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/t7.c</prefix>
+    </input>
+
+     </inputgroup>
+
+<input id="arithmetic">
+        <cFile>src/main/resources/input/arithmetic.c</cFile>
+        <dataFile>src/main/resources/input/arithmetic.ttl</dataFile>
+	<cfgFile>src/main/resources/input/arithmetic_cfg.ttl</cfgFile> 
+	<prefix>ftp://home/demo/Dropbox/testcases/arithmetic.c</prefix>
+    </input>
+
+</inputs>

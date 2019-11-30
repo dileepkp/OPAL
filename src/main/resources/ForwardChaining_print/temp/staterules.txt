@@ -1,0 +1,28 @@
+
+###########################################################################################################################
+################################ frozen paths #############################################################################
+
+[frozenPaths:
+#		(3 pa:parameter1 completed(?st,?cond3,?index3,?baseConditions3,?parCond,?pp3))
+#		(4 4 frozenPath(?st4,?cond4,?pp4))
+#		(1 1 updateOtherVarCompleted(?st,?cond3))
+
+#		(?st4 c:hasParent ?par4)
+#		(?par4 pa:stProgramConditions ?parCond)
+
+# remove below
+#		(?par4 pa:iterationIndex func1(?cond4_2,?index4))
+#		nearestNeighbour(?cond4,?par4,pa:stProgramConditions,?cond4_2)		
+		
+
+		
+->
+		remove(0)		
+#		remove(1)
+
+		(1 1 completed(?st,?cond3,?index3,?baseConditions3))
+# remove below
+#		(1 1 completed(?st,?cond2,?index2,?baseConditions2))
+#		(?cond3 pa:sameState ?cond2)
+		print('frozen paths',?st)
+]

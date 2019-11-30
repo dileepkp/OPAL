@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#"
+     xml:base="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology"
+     xmlns:BugFindingOntology="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ProgramAnalysisOntology="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology">
+        <owl:imports rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c/1.0.0"/>
+        <owl:imports rdf:resource="http://www.openk.org/ontologies/c"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#atProgramPoint -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#atProgramPoint">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#beginExecution -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#beginExecution">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#componentSource -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#componentSource">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#componentType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#componentType">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasArrayState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasArrayState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasCapacity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasCapacity">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasField">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasFieldState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasFieldState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasLHS -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasLHS">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasPointerState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasPointerState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasProgramConditions -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasProgramConditions">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasQueryClause -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasQueryClause">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasRHS -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasRHS">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasRelation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasRelation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasSize -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasSize">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasStructureState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasStructureState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasVariableState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#hasVariableState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lowerBound -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lowerBound">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#memoryUnits -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#memoryUnits">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextFalseStatement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextFalseStatement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextStatment -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextStatment">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextTrueStatement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#nextTrueStatement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#offset -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#offset">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#pointsToResource -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#pointsToResource">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#stateRelation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#stateRelation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#stateValue -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#stateValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#upperBound -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#upperBound">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#hasValue -->
+
+    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#hasValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysisProperty"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#dataTypeSize -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#dataTypeSize">
+        <rdfs:domain rdf:resource="http://www.openk.org/ontologies/c#BasicType"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#BasicType -->
+
+    <owl:Class rdf:about="http://www.openk.org/ontologies/c#BasicType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#MemoryUnitsType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ArrayState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ArrayState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#Interval -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#Interval">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#MemoryObject -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#MemoryObject">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#MemoryUnitsType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#MemoryUnitsType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#PointerState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#PointerState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramPoint -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramPoint">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#Query -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#Query">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#QueryClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#QueryClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#SetOfConstants -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#SetOfConstants">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StructureState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StructureState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#VariableState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#VariableState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#float -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#float">
+        <BugFindingOntology:dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</BugFindingOntology:dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#int -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#int">
+        <BugFindingOntology:dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</BugFindingOntology:dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#short -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#short">
+        <BugFindingOntology:dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</BugFindingOntology:dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#constant -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#constant">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#equals -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#equals">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#expression -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#expression">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#garbageValue -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#garbageValue">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#greaterThan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#greaterThan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#greaterThanOrEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#greaterThanOrEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#interval -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#interval">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lessThan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lessThan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lessThanOrEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#lessThanOrEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#notEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#notEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#runTimeValue -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#runTimeValue">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#setOfConstants -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#setOfConstants">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#setOfIntervals -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#setOfIntervals">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#StateValueType"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,26 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix file0: <ftp://home/demo/Dropbox/testcases/pointers.c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+
+
+file0:4_1_4_5 pa:beginExecutionInFunction file0:2_11_19_1 .
+file0:4_1_4_5 pa:firstStatementInFunction file0:2_11_19_1 .
+file0:4_1_4_5 pa:nextStatement file0:5_1_5_6 .
+file0:5_1_5_6 pa:nextStatement file0:7_1_7_7 .
+file0:7_1_7_7 pa:nextStatement file0:8_1_8_7 .
+file0:8_1_8_7 pa:nextStatement file0:10_1_10_6 .
+file0:10_1_10_6 pa:nextStatement file0:11_1_11_6 .
+file0:11_1_11_6 pa:nextStatement file0:13_1_13_6 .
+file0:13_1_13_6 pa:nextStatement file0:14_1_14_6 .
+file0:14_1_14_6 pa:nextStatement file0:16_1_16_5 .
+file0:16_1_16_5 pa:nextStatement file0:18_1_18_9 .
+file0:2_11_19_1_exit c:hasParent file0:2_11_19_1 .
+
+
+file0:2_11_19_1_exit pa:endExecutionInFunction file0:2_11_19_1 .

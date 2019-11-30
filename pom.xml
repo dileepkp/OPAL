@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dileep</groupId>
+    <artifactId>OPAL</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <!--
+    <repositories>
+       <repository>
+        <id>local-files</id>
+        <name>local-files</name>
+        <url>/home/aidb/Dropbox/BugFinderJena/src/lib/com.microsoft.z3.jar</url>
+       </repository>
+       
+  </repositories>
+  -->
+     <dependencies>
+    <dependency>
+    <groupId>org.apache.jena</groupId>
+    <artifactId>apache-jena-libs</artifactId>
+    <type>pom</type>
+    <version>3.6.0</version>
+  </dependency>
+  
+       <dependency>
+     <groupId>javabdd</groupId>
+     <artifactId>libbuddy</artifactId>
+     <version>1.0</version>
+     
+            </dependency>
+ <!-- https://mvnrepository.com/artifact/org.sosy-lab/javasmt-solver-z3 
+<dependency>
+    <groupId>org.sosy-lab</groupId>
+    <artifactId>javasmt-solver-z3</artifactId>
+    <version>z3-4.4.1-788-g8df145d</version>
+    <type>pom</type>
+</dependency
+-->
+         <dependency>
+     <groupId>com.microsoft</groupId>
+     <artifactId>libz3java</artifactId>
+     <version>1.0</version>
+        </dependency>
+      
+        <!--  
+               <dependency>
+     <groupId>ProgramRdfBdd</groupId>
+     <artifactId>ProgramRdfBdd</artifactId>
+     <version>1.0</version>
+        </dependency>
+        -->
+        
+     </dependencies>
+    <name>OPAL</name>
+</project>

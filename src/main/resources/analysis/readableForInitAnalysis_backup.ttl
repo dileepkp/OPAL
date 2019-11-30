@@ -1,0 +1,41 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:VarRelVar .
+pa:0_0 pa:hasQueryCondition pa:0_2 .
+pa:0_2 pa:hasLHS pa:0_3 .
+pa:0_3 pa:queryConditionType pa:variable .
+pa:0_3 pa:queryConditionSource pa:sparql .
+pa:0_3 pa:value ''' SELECT ?exp (group_concat(?var1) as ?var) (pa:varList as ?varType)
+        WHERE {
+		?varRef rdf:type c:VariableRef .
+		?assign c:hasLeftOperand ?varRef.
+		?assign c:hasParent* ?init .
+		?varRef c:referTo ?var1 .
+#		?var1 rdf:type ?varType1 .
+		?exp rdf:type c:ForStatement .
+		?exp c:hasForInit ?init.
+	}
+	group by ?exp ?varType''' .
+pa:0_2 pa:hasRHS pa:0_4 .
+pa:0_4 pa:queryConditionType pa:variable .
+pa:0_4 pa:queryConditionSource pa:sparql .
+pa:0_4 pa:value ''' SELECT ?exp (group_concat(?var1) as ?var) (pa:varList as ?varType)
+        WHERE {
+		?varRef rdf:type c:VariableRef .
+		?varRef c:hasParent* ?test .
+		?varRef c:referTo ?var1 .
+#		?var1 rdf:type ?varType1 .
+		?exp rdf:type c:ForStatement .
+		?exp c:hasForTest ?test.
+	}
+	group by ?exp ?varType''' .
+pa:0_2 pa:hasRelation pa:0_5 .
+pa:0_5 pa:value pa:notIn .

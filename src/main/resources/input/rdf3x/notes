@@ -1,0 +1,72 @@
+
+
+
+
+
+?st <c#hasForInit> ?init .
+
+?init a ?initType.
+filter (?initType = <c#ExpressionStatement> || ?initType = <c#VariableDecl>)
+
+
+
+
+union
+{
+?incr a ?incrType.
+filter(?incrType = <c#AssignOp> )
+?incr <c#hasLeftOperand> ?op.
+?incr <c#hasRightOperand> ?rincr.
+?rincr a ?rincrop .
+filter(?rincrop = <c#SubOp> || ?rincrop = <c#AddOp>)
+?rincr ?incroperand ?opincr.
+ ?opincr <c#referTo> ?initVar.
+filter(?incroperand = <c#hasRightOperand> || ?incroperand = <c#hasLeftOperand>)
+
+}
+
+
+union
+{
+?st <c#hasForInit> ?initVar .
+#?ass <c#hasParent> ?initVar .
+#?initVar a <c#VariableDecl>.
+#?ass a <c#AssignInitializer> .
+
+}
+
+
+
+
+
+
+?test a ?testop.
+filter (?testop = <c#LessOp> || ?testop = <c#GreaterOp> || ?testop = <c#LeqOp> || ?testop = <c#GeqOp>)
+?test ?testoperand ?optest.
+filter(?testoperand = <c#hasLeftOperand> || ?testoperand = <c#hasRightOperand>)
+?optest <c#referTo> ?initVar.
+
+?incr a ?incrType.
+filter(?incrType = <c#PostfixIncrementOp> || ?incrType = <c#PostfixDecrementOp> || ?incrType = <c#AddAssignOp> || ?incrType = <c#SubAssignOp>)
+?incr <c#hasOperand> ?op.
+?op <c#referTo> ?initVar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

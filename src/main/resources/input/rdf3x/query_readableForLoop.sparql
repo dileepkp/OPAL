@@ -1,0 +1,24 @@
+select ?exp 
+        where {
+		?exp a <c#ForStatement> .
+		?exp <c#hasForInit> ?init.
+		?exp <c#hasForTest> ?test.
+
+		?temp  <c#hasParent> ?init.
+		?assign <c#hasParent> ?temp.
+		?assign   a <c#AssignOp> .
+		?assign <c#hasLeftOperand> ?varRef.
+		?varRef   a <c#VariableRef> .
+		?varRef <c#referTo> ?var1 .
+		
+
+		OPTIONAL {
+		?varRef2 <c#hasParent> ?t2.		
+		?t2 <c#hasParent> ?test.
+		?varRef2   a <c#VariableRef> .
+		?varRef2 <c#referTo> ?var2.
+		filter(?var2 = ?var1)
+		}
+		filter(!bound(?var2))
+
+	}

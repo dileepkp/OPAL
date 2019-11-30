@@ -1,0 +1,43 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+#  divide By Zero
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:VarRelVal .
+pa:0_0 pa:hasQueryCondition pa:0_2 .
+pa:0_2 pa:hasLHS pa:0_3 .
+pa:0_3 pa:queryConditionType pa:variable .
+pa:0_3 pa:queryConditionSource pa:sparql .
+pa:0_3 pa:value ''' SELECT ?exp ?var ?varType
+        WHERE {
+		?subExp rdf:type ?op .
+		?subExp (c:hasParent)* ?exp .
+		?exp rdf:type ?expType .
+		{
+		?subExp c:hasRightOperand/(c:hasOperand)? ?right .
+		?right rdf:type ?varType .
+		?right (c:referTo|c:hasValue) ?var.
+		FILTER(?varType = c:VariableRef || (?varType = c:Value && ?var = 0)) .
+		}
+		UNION
+		{
+		?subExp c:hasRightOperand ?var .
+		?var rdf:type ?varType .
+		FILTER(?varType IN (c:AddOp,c:SubOp,c:MulOp,c:DivOp,c:ModOp)) .
+		}
+		FILTER((?op = c:DivOp || ?op = c:ModOp) &&
+			(?expType = c:ExpressionStatement || ?expType = c:VariableDecl || ?expType = c:ReturnStatement)).
+	}''' .
+pa:0_2 pa:hasRHS pa:0_4 .
+pa:0_4 pa:queryConditionType pa:value .
+pa:0_4 pa:dataType xsd:int .
+pa:0_4 pa:value 0 .
+pa:0_2 pa:hasRelation pa:0_5 .
+pa:0_5 pa:value pa:equals .

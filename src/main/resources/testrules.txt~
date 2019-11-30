@@ -1,0 +1,106 @@
+@prefix drc: <http://www.codesupreme.com/#>. 
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix file0: <ftp:/home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#> .
+ 
+#[rule1: (?u drc:loves drc:rollo )  -> (?u drc:loves drc:food)] 
+
+[rule1: (drc:1 drc:11 ?u) (drc:2 drc:22 drc:33)  -> remove(0), (1 1 1)] 
+
+[rule2:  (drc:2 drc:22 drc:33) (1 1 1) -> print('in rule2')] 
+
+[rule3:  (drc:1 drc:11 drc:111) (1 1 1) -> print('in rule3')] 
+
+[rule4: isLiteral(2) -> print('isliteral') ]
+
+[beginExecution:
+(-2 -2 -2)
+		(?st rdf:type pa:beginExecutionStatement),
+		makeTemp(?pp), 
+		makeTemp(?cond),
+#list of variables
+		makeTemp(?varList)
+		
+->
+		(?pp rdf:type pa:ProgramPoint),
+		(?cond rdf:type pa:conditionList),
+		(?cond rdf:item 'true'),
+#		(?cond rdf:rest rdf:nil),
+		(?pp pa:afterStatement ?st),
+		(?pp pa:hasProgramConditions ?cond),
+		(?varList rdf:type rdf:list),
+		(?varList rdf:type pa:varList),
+		(1 1 analyzeStatement(?st, ?pp, ?cond))
+
+]
+
+# <file:///home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#416_3_416_13>
+
+
+[test3:
+ (1 1 execute3(?st))
+->
+print('test3')
+]
+
+
+[test2:
+ (1 1 execute2(?st))
+->
+print('test2')
+]
+
+
+[beginExecution2:
+(-2 -2 -2)
+		(?st pa:beginExecutionInFunction file0:415_18_420_1 ),
+		
+->
+ (1 1 execute(?st)),
+(1 1 execute2(?st))
+(1 1 execute3(?st))
+
+]
+
+[test1:
+ (1 1 execute(?st))
+->
+print('test1')
+]
+
+
+[analyzeStatement:
+		(1 1 analyzeStatement(?st, ?pp, ?cond)),
+		(?st rdf:type c:Variable),
+		noValue(?st,c:hasInitializer),
+		(?st c:hasType c:pointer_type)
+->
+		(1 1 makePS(?st, ?pp, ?cond)),
+		(1 1 updateVarList(?st))
+]
+
+# Different ways of making variable states
+[makePointerState1:
+		(1 1 makePS(?st, ?pp, ?cond)),
+		makeTemp(?ps)
+->
+		(?st pa:hasPointerState ?ps),
+		(?ps pa:atProgramPoint ?pp)
+]
+
+# List of variables
+[updateVarList:
+		(1 1 updateVarList(?st)),
+		(?varList rdf:type pa:varList),	
+		noValue(?varList,rdf:item,?st),
+		(?st rdf:type c:Variable)
+->
+		(?varList rdf:item ?st)
+#		(?varList rdf:rest rdf:nil)
+]
+
+

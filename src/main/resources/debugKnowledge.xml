@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<queries>
+
+    <query id="0">
+        PREFIX c:&lt;http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#&gt;
+        PREFIX file0:&lt;ftp:/home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#&gt;
+        PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+        PREFIX pa:&lt;http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#&gt;
+        PREFIX fl:&lt;http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#&gt;
+
+    </query>
+
+
+    <query id="1">
+        SELECT ?s ?p ?o
+        WHERE {
+         ?s ?p ?o.
+        }
+
+    </query>
+    
+     <query id="getNext">
+        SELECT DISTINCT ?o
+        WHERE {
+         ?s pa:hasProgramConditions ?o.
+        }
+
+    </query>
+  
+    <!-- Get the values of the variables at different program points -->  
+     <query id="2">
+        SELECT ?ps ?st ?pp ?val ?rel
+        WHERE {
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?st.
+         file0:375_3_375_13 pa:hasPointerState ?ps.
+         ?ps pa:stateValue ?val.
+         ?ps pa:stateRelation ?rel.
+        }
+         order by ?st
+    </query>
+    
+    <!-- Select variables -->
+    <query id="3">
+        SELECT distinct ?var
+        WHERE {
+         ?var rdf:type c:Variable.
+        }
+    </query>
+    
+      <!-- Get the pointer states of the variables -->  
+     <query id="4">
+        SELECT ?ps 
+        WHERE {
+         file0:416_3_416_13 pa:hasPointerState ?ps .
+        }
+    </query>
+   
+    <!-- Get the program paths reaching a statement -->  
+     <query id="5">
+        SELECT ?cond ?last ?o
+        WHERE {
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement file0:787_3_788_29_exit.
+         file0:765_3_765_8 pa:hasPointerState ?ps.
+         ?pp pa:hasProgramConditions ?cond.
+         ?cond (rdf:item)* ?temp.
+         ?temp ?last ?o.
+         FILTER (!isBlank(?o) &amp;&amp; (?last = rdf:item || ?last = pa:negItem)).
+        }
+         order by ?cond ?o ?last
+    </query>
+
+ <!-- Get the program paths reaching a statement -->  
+     <query id="fcloseAnalysis">
+        SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType) 
+        WHERE {
+                ?exp rdf:type c:ReturnStatement.
+		?exp c:hasParent* ?func .
+		?var rdf:type c:VariableDecl .
+		?var c:hasBaseType c:_IO_FILE .
+		?var c:hasParent* ?func .
+		?var pa:hasPointerState ?ps . 
+		?ps pa:pointsToResource ?res .
+		?ps pa:atProgramPoint/pa:afterStatement ?exp.
+		?var2 c:hasBaseType c:_IO_FILE .
+		MINUS{
+		?var2 c:hasScope ?scope.
+		?scope rdf:type c:Global .
+		?var2 pa:hasPointerState ?ps2 . 
+		?ps2 pa:pointsToResource ?res . 
+		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
+}
+            }
+    </query>
+
+ <query id="query_cg">
+        SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType) 
+        WHERE {
+                ?exp rdf:type c:ReturnStatement.
+		?exp c:hasParent* ?func .
+		?var rdf:type c:VariableDecl .
+		?var c:hasBaseType c:_IO_FILE .
+		?var c:hasParent* ?func .
+		?var pa:hasPointerState ?ps . 
+		?ps pa:pointsToResource ?res .
+		?ps pa:atProgramPoint/pa:afterStatement ?exp.
+		?var2 c:hasBaseType c:_IO_FILE .
+		MINUS{
+		?var2 c:hasScope ?scope.
+		?scope rdf:type c:Global .
+		?var2 pa:hasPointerState ?ps2 . 
+		?ps2 pa:pointsToResource ?res . 
+		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
+}
+            }
+    </query>
+
+
+ <query id="fcloseAnalysis">
+        SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType) 
+        WHERE {
+                ?exp rdf:type c:ReturnStatement.
+		?exp c:hasParent* ?func .
+		?var rdf:type c:VariableDecl .
+		?var c:hasBaseType c:_IO_FILE .
+		?var c:hasParent* ?func .
+		?var pa:hasPointerState ?ps . 
+		?ps pa:pointsToResource ?res .
+		?ps pa:atProgramPoint/pa:afterStatement ?exp.
+		?var2 c:hasBaseType c:_IO_FILE .
+		MINUS{
+		?var2 c:hasScope ?scope.
+		?scope rdf:type c:Global .
+		?var2 pa:hasPointerState ?ps2 . 
+		?ps2 pa:pointsToResource ?res . 
+		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
+}
+            }
+    </query>
+</queries>

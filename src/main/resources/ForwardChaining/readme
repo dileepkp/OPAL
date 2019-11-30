@@ -1,0 +1,1 @@
+1) The variable baseConditions in rules will be helpful for interprocedural analyses. For intraprocedural analyses it doesn't have any impact.

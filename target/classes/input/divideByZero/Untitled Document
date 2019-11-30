@@ -1,0 +1,7 @@
+sudo apt-get install libgtk2.0-dev
+
+sudo apt-get install libglib2.0-dev
+
+gcc -c -w t6.c `pkg-config --cflags --libs glib-2.0` 
+
+gcc -c -w t5.c `pkg-config --cflags gtk+-2.0` `pkg-config --libs gtk+-2.0`

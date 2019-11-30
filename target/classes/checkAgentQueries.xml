@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<queries>
+
+    <prefix id="0">
+        PREFIX c:&lt;http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#&gt;
+        PREFIX file0:&lt;file:///home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/writeToFile.c#&gt;
+        PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+        PREFIX pa:&lt;http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#&gt;
+        PREFIX fl:&lt;http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#&gt;
+
+    </prefix>
+
+
+    <query id="1">
+        SELECT ?s ?model ?location
+        WHERE {
+?s rdf:type pa:query .
+?s pa:queryModel ?model .
+?s pa:programPointSettings ?location .
+        }
+
+    </query>
+  
+    <!-- Select the query conditions where lhs is variable, rhs is value, relation 
+           is a constant  -->  
+     <query id="2">
+        SELECT ?lhsVal ?rhsVal ?rhsType ?relVal
+        WHERE {
+         ?query pa:hasQueryCondition ?cond.
+?cond pa:hasLHS ?lhs.
+?lhs pa:queryConditionType pa:variable .
+?lhs pa:queryConditionSource pa:sparql .
+?lhs pa:value ?lhsVal .
+         ?cond pa:hasRHS ?rhs .
+?rhs pa:queryConditionType ?rhsType .
+?rhs pa:value ?rhsVal .
+?cond pa:hasRelation ?rel .
+?rel pa:value ?relVal .
+        }
+    </query>
+
+  <!-- Select the query conditions where lhs is variable, rhs is value, relation 
+           is a constant  -->  
+     <query id="2_backup">
+        SELECT ?lhsVal ?rhsVal ?relVal
+        WHERE {
+         ?query pa:hasQueryCondition ?cond.
+?cond pa:hasLHS ?lhs.
+?lhs pa:queryConditionType pa:variable .
+?lhs pa:queryConditionSource pa:sparql .
+?lhs pa:value ?lhsVal .
+         ?cond pa:hasRHS ?rhs .
+?rhs pa:queryConditionType pa:value .
+?rhs pa:dataType xsd:int .
+?rhs pa:value ?rhsVal .
+?cond pa:hasRelation ?rel .
+?rel pa:value ?relVal .
+        }
+    </query>
+    
+<!-- Select the query conditions where lhs is variable, rhs is variable, relation 
+           is a constant  -->  
+     <query id="3">
+        SELECT ?lhsVal ?rhsVal ?rhsType ?relVal
+        WHERE {
+         ?query pa:hasQueryCondition ?cond.
+?cond pa:hasLHS ?lhs.
+?lhs pa:queryConditionType pa:variable .
+?lhs pa:queryConditionSource pa:sparql .
+?lhs pa:value ?lhsVal .
+         ?cond pa:hasRHS ?rhs .
+?rhs pa:queryConditionType ?rhsType .
+?rhs pa:queryConditionSource pa:sparql .
+?rhs pa:value ?rhsVal .
+?cond pa:hasRelation ?rel .
+?rel pa:value ?relVal .
+        }
+    </query>
+
+<!-- Select the enumerative query  -->  
+     <query id="4">
+        SELECT ?val
+        WHERE {
+?query pa:hasQuery ?t .
+?t pa:value ?val.
+
+        }
+    </query>
+    
+   
+    
+</queries>

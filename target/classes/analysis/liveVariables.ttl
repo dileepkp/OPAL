@@ -1,0 +1,51 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:queryType pa:EnumQuery.
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:SPARQL .
+pa:0_0 pa:hasQuery pa:0_2 .
+pa:0_2 pa:value ''' select ?st ?varName
+where {
+# '*' because of Gen set
+?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement)* ?useSt.
+
+?useSt rdf:type c:ExpressionStatement.
+?useSt c:hasExpression ?expr.
+?expr rdf:type ?exprType.
+{
+?expr (c:hasRightOperand | c:hasArgumentList)  ?right.
+}
+union
+{
+?expr c:hasLeftOperand ?arrayRef.
+?arrayRef rdf:type c:ArraySub.
+?arrayRef c:hasRightOperand ?right. 
+}
+?varRef c:hasParent* ?right.
+?varRef rdf:type c:VariableRef.
+?varRef c:referTo ?var.
+?var c:hasName ?varName.
+
+filter(?exprType in (c:AssignOp,c:FunctionCall))
+
+MINUS{
+?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement)+ ?redefSt.
+?redefSt (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement)+ ?useSt.
+
+?redefSt rdf:type c:ExpressionStatement.
+?redefSt c:hasExpression ?expr2.
+?expr2 rdf:type c:AssignOp.
+?expr2 (c:hasLeftOperand) ?left.
+
+?varRef2 c:hasParent* ?left.
+?varRef2 rdf:type c:VariableRef.
+?varRef2 c:referTo ?var.
+}
+}''' .

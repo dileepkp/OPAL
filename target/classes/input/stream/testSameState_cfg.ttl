@@ -1,0 +1,23 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix file0: <ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/stream/testSameState.c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+file0:3_1_3_5 pa:beginExecutionInFunction file0:2_11_10_1 .
+file0:3_1_3_5 pa:firstStatementInFunction file0:2_11_10_1 .
+file0:3_1_3_5 pa:nextStatement file0:4_1_4_5 .
+file0:5_1_8_4 pa:nextTrueStatement file0:6_1_6_4 .
+file0:5_1_8_4_exit c:hasParent file0:5_1_8_4 .
+file0:6_1_6_4 pa:nextStatement file0:5_1_8_4_exit .
+file0:5_1_8_4 pa:nextFalseStatement file0:8_1_8_4 .
+file0:5_1_8_4_exit c:hasParent file0:5_1_8_4 .
+file0:8_1_8_4 pa:nextStatement file0:5_1_8_4_exit .
+file0:4_1_4_5 pa:nextStatement file0:5_1_8_4 .
+file0:5_1_8_4_exit c:hasParent file0:5_1_8_4 .
+file0:5_1_8_4_exit pa:nextStatement file0:9_1_9_15 .
+
+
+file0:9_1_9_15 pa:endExecutionInFunction file0:2_11_10_1 .

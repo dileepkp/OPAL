@@ -1,0 +1,28 @@
+State Information Validation
+
+1) Every variableState has exactly one stateValue and one stateRelation and more than one programPoint. The domain of varibleState is a variable.
+
+2) Every programPoint is associated with one Statement (has exactly one afterStatement node of type rdf:statement) and programPath
+
+3) Every programpath has atleast one programcondition and the associated truth value.
+
+4) Every pointer variable has a resource associated with it.
+
+5) Every stateRelation has exactly one equality or inequality operator
+
+CFG Validation
+
+6) Every function has eactly one entry point
+
+7) Every conditional-statement has exaclty one iftrue-statement and exactly one iffalse-Statement
+
+8) Every non-conditional-statement has exaclty one nextStatement
+
+Analysis Query Validation
+
+9) Every query has atleast one query clause
+
+10) Every query caluse of type SPARQL has only lhs (no rhs and no relation)
+
+11) Every query clause of type constraint has exactly one lhs, rhs and relation
+

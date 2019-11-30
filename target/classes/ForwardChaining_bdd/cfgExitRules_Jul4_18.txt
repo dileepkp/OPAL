@@ -1,0 +1,128 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix fl: <http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#> .
+
+
+##################################################################################################################################
+################################ false rules #####################################################################################
+
+# In nested loop scenario, nearestNeighbour function returns the 
+# inner most loop that will exited.
+
+# A dummy exit statement created in cfg.
+# Simply pass control to the next statement.
+[dummyCFGExit:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+			
+		(?par pa:iterationIndex func0(?cond2,?index))
+
+		
+		strConcat(?st,?st2),
+		regex(?st2,'.*exit$')
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		(?st c:hasParent ?par)
+
+
+		equal(?iter,?index)
+		(?par pa:stProgramConditions ?cond2)
+		nearestNeighbour(?cond,?par,pa:stProgramConditions,?cond2)		
+
+->
+		remove(0)
+
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter)),
+		(1 1 completed(?st,?cond,?index,?baseConditions))
+		(3 pa:parameter1 completed(?st,?cond,?index,?baseConditions,?cond2,?pp))
+		print('dummy cfg exit false',?st)
+]
+
+
+
+
+##################################################################################################################################
+################################ true rules ######################################################################################
+
+
+
+# A dummy exit statement created in cfg.
+# Simply pass control to the next statement.
+[dummyCFGExit:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+
+		(?par pa:iterationIndex func1(?cond2,?index))
+		
+		strConcat(?st,?st2),
+		regex(?st2,'.*exit$')
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		(?st c:hasParent ?par)
+
+		notEqual(?iter,?index)
+		(?par pa:stProgramConditions ?cond2)
+		nearestNeighbour(?cond,?par,pa:stProgramConditions,?cond2)		
+
+		makeTemp(?pp2)
+
+		
+->
+		remove(0)		
+		(?pp2 rdf:type pa:ProgramPoint),
+		(?pp2 pa:afterStatement ?st),
+		(?pp2 pa:hasProgramConditions ?cond),
+		(?pp2 pa:iteration ?index)
+		(?pp2 pa:baseConditions ?baseConditions)
+
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp2,1,?iter,?index)),
+
+		(2 pa:parameter1 completed(?st,?cond,?index,?baseConditions,?cond2,?pp))
+		print('dummy cfg exit true',?st, 'index',?index)
+]
+
+
+################################################################################################################################
+################################ same state rules ##############################################################################
+
+
+# After exit of cfg, check for the equal state in
+# true path and false path
+# Both paths are distinguished by 2 and 3
+[stateEqualCheck:
+		(2 pa:parameter1 completed(?st,?cond2,?index2,?baseConditions2,?parCond,?pp2))
+		(3 pa:parameter1 completed(?st,?cond3,?index3,?baseConditions3,?parCond,?pp3))
+		(1 1 updateOtherVarCompleted(?st,?cond2))
+		(1 1 updateOtherVarCompleted(?st,?cond3))
+		(?varList rdf:type pa:varList)
+		stateEqual(?varList,?pp2,?pp3)
+
+		
+->
+		remove(0)		
+		remove(1)
+		(?cond3 pa:sameState ?cond2)
+		print('state equal check',?st)
+]
+
+
+[stateNotEqualCheck:
+		(2 pa:parameter1 completed(?st,?cond2,?index2,?baseConditions2,?parCond,?pp2))
+		(3 pa:parameter1 completed(?st,?cond3,?index3,?baseConditions3,?parCond,?pp3))
+		(1 1 updateOtherVarCompleted(?st,?cond2))
+		(1 1 updateOtherVarCompleted(?st,?cond3))
+		(?varList rdf:type pa:varList)
+		stateNotEqual(?varList,?pp2,?pp3)
+
+		
+->
+		remove(0)		
+		remove(1)
+		(1 1 completed(?st,?cond2,?index2,?baseConditions2))
+#		(1 1 completed(?st,?cond3,?index3,?baseConditions3))
+#		(?cond3 pa:sameState ?cond2)
+		print('state not equal check',?st)
+]
+

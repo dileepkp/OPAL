@@ -1,0 +1,506 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix fl: <http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#> .
+# @prefix file0: <ftp:/home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#> .
+
+
+
+###############################################################################################################################
+################################ Analyze other types of statements ############################################################
+
+
+
+#A parameter assignment statement
+[ParameterAssignStatement1:
+(-2 -2 -2)
+#commented on Nov 10,2019
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:Variable),
+		(?st pa:tempStateValue ?stateVal)
+		(?st pa:tempStateRelation  ?stateRel)
+		(?st c:hasType c:pointer_type)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		(1 1 updateVarList(?st,?baseConditions,?cond))
+		(1 1 makePS2(?st, ?pp, ?cond,?stateVal, ?stateRel)),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?st,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+#		print('parameter assignment in function call')
+]
+
+
+# Statement 1 in while(1)
+[forInitStatement:
+	(-2 -2 -2)
+		(1 1 execute(?prev,?st,?cond,?pp)),
+#		(?st rdf:type c:ForInitStatement)
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:Value),
+		(?expr c:hasValue 1),
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+#		print('Statement 1 in while(1)'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+# Postfix and prefix operations
+[rule:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?st),		
+		(?st rdf:type c:PostfixIncrementOp)
+
+#		(?st c:hasParent ?forSt)
+#		noValue(?forSt, c:hasForIncr, ?st)
+
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+
+		(?pp pa:baseConditions ?baseConditions)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+	
+		(?varList rdf:type pa:varList)		
+		(?varList rdf:item ?var)
+		(?varList pa:baseConditions ?baseConditions)
+
+		(?var pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter3)
+		(?pp pa:iteration ?iter3)
+		(?prevPP pa:baseConditions ?baseConditions)
+		(?ps2 pa:stateValue ?concreteVal)
+		isLiteral(?concreteVal)
+		addOne(?concreteVal,?newVal)
+	
+		
+->
+		(1 1 makePS2(?var, ?pp, ?cond,?newVal, pa:equals))
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?var,?iter3,?iter3)),
+		(1 1 completed(?exp,?cond,?iter3,?baseConditions))
+		remove(0)
+]
+
+
+
+# Postfix and prefix operations
+[rule:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?st),		
+		(?st rdf:type c:PrefixIncrementOp)		
+
+#		(?st c:hasParent ?forSt)
+#		noValue(?forSt, c:hasForIncr, ?st)
+
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+
+		(?pp pa:baseConditions ?baseConditions)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+	
+		(?varList rdf:type pa:varList)		
+		(?varList rdf:item ?var)
+		(?varList pa:baseConditions ?baseConditions)
+
+		(?var pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter3)
+		(?pp pa:iteration ?iter3)
+		(?prevPP pa:baseConditions ?baseConditions)
+		(?ps2 pa:stateValue ?concreteVal)
+		isLiteral(?concreteVal)
+		addOne(?concreteVal,?newVal)
+	
+		
+->
+
+		(1 1 makePS2(?var, ?pp, ?cond,?newVal, pa:equals))
+
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?var,?iter3,?iter3)),
+		(1 1 completed(?exp,?cond,?iter3,?baseConditions))
+		remove(0)
+]
+
+
+
+# Postfix and prefix operations
+[rule:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?st),		
+		(?st rdf:type c:PostfixDecrementOp)
+
+#		(?st c:hasParent ?forSt)
+#		noValue(?forSt, c:hasForIncr, ?st)
+
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+
+		(?pp pa:baseConditions ?baseConditions)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+	
+		(?varList rdf:type pa:varList)		
+		(?varList rdf:item ?var)
+		(?varList pa:baseConditions ?baseConditions)
+
+		(?var pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter3)
+		(?pp pa:iteration ?iter3)
+		(?prevPP pa:baseConditions ?baseConditions)
+		(?ps2 pa:stateValue ?concreteVal)
+		isLiteral(?concreteVal)
+		difference(?concreteVal,1, ?newVal)
+	
+		
+->
+
+		(1 1 makePS2(?var, ?pp, ?cond,?newVal, pa:equals))
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?var,?iter3,?iter3)),
+		(1 1 completed(?exp,?cond,?iter3,?baseConditions))
+		remove(0)
+]
+
+
+
+# Postfix and prefix operations
+[rule:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?st),		
+		(?st rdf:type c:PrefixDecrementOp)		
+
+#		(?st c:hasParent ?forSt)
+#		noValue(?forSt, c:hasForIncr, ?st)
+
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+
+		(?pp pa:baseConditions ?baseConditions)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+	
+		(?varList rdf:type pa:varList)		
+		(?varList rdf:item ?var)
+		(?varList pa:baseConditions ?baseConditions)
+
+		(?var pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter3)
+		(?pp pa:iteration ?iter3)
+		(?prevPP pa:baseConditions ?baseConditions)
+		(?ps2 pa:stateValue ?concreteVal)
+		isLiteral(?concreteVal)
+		difference(?concreteVal,1, ?newVal)
+		
+->
+
+		(1 1 makePS2(?var, ?pp, ?cond,?newVal, pa:equals))
+
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?var,?iter3,?iter3)),
+		(1 1 completed(?exp,?cond,?iter3,?baseConditions))
+		remove(0)
+]
+
+
+
+
+# Assignment Statement; Assign constant to a scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+(?right c:hasOperand ?val),
+		(?val rdf:type c:Value),
+		(?val c:hasValue ?concreteVal),
+		(?val c:hasType c:int),	
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+
+		(1 1 makePS2(?var , ?pp, ?cond,?concreteVal,pa:equals))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+
+	
+
+
+]
+
+
+
+# Assignment Statement; Assign constant to a scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+(?right rdf:type c:Value),
+		(?right c:hasValue ?concreteVal),
+		(?right c:hasType c:int),
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+		(1 1 makePS2(?var , ?pp, ?cond,?concreteVal,pa:equals))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+
+
+
+]
+
+
+
+
+# Assignment Statement; Assign expression to a scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?right rdf:type ?arithOp)
+		(?arithmeticOp rdf:type pa:arithmeticOperators)
+		(?arithmeticOp rdf:item ?arithOp)
+		
+
+		(?varList rdf:type pa:varList)
+		(?varList rdf:item ?var)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+		
+		getValueOfExpression(?varList, ?prevPP, ?right, ?newVal)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+	
+		(1 1 makePS2(?var , ?pp, ?cond,?newVal,pa:equals))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+	
+
+	
+
+]
+
+
+
+# Assignment Statement; Assign addassign type expression to a scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type ?exprType),
+		(c:ArithmeticAssignOp rdf:item ?exprType)
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+#		(?right rdf:type ?arithOp)
+#		(?arithmeticOp rdf:type pa:arithmeticOperators)
+#		(?arithmeticOp rdf:item ?arithOp)
+		
+
+		(?varList rdf:type pa:varList)
+		(?varList rdf:item ?var)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+		
+		getValueOfExpression(?varList, ?prevPP, ?right, ?newVal)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+		print('subassign op type', ?st)
+		(1 1 makePS2(?var , ?pp, ?cond,?newVal,pa:equals))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+	
+
+	
+
+]
+
+
+
+# Assignment Statement; Assign expression to a global scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?right rdf:type ?arithOp)
+		(?arithmeticOp rdf:type pa:arithmeticOperators)
+		(?arithmeticOp rdf:item ?arithOp)
+		
+
+		(?varList rdf:type pa:varList)
+		noValue(?varList, rdf:item, ?var)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+		
+		getValueOfExpression(?varList, ?prevPP, ?right, ?newVal)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+	
+
+		(1 1 updateVarList(?var,?baseConditions,?cond))
+		(1 1 makePS2(?var , ?pp, ?cond,?newVal,pa:equals))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+	
+
+
+]
+
+
+
+# Assignment Statement; Assign constant to a global scalar variable
+[
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?right c:hasOperand ?val),
+		(?val rdf:type c:Value),
+		(?val c:hasValue ?concreteVal),
+		(?val c:hasType c:int),
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		makeTemp(?ps)
+
+		(?varList rdf:type pa:varList),		
+		noValue(?varList, rdf:item, ?var),
+		(?varList pa:baseConditions ?baseConditions)
+
+		
+->
+		
+#		print('Assignment Statement global type i = 0 '),
+		(1 1 updateVarList(?var,?baseConditions,?cond))
+		(1 1 makePS2(?var, ?pp, ?cond,?concreteVal, pa:equals))
+		
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+
+
+# Comma op left, right
+[CommaOpStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:CommaOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+		
+#		print('Comma op left, right in forInit',?st),
+		(?left c:hasExpression ?left)
+		(?right c:hasExpression ?right)
+		(?prev pa:nextStatement ?left)
+		(?left pa:nextStatement ?right)
+		(?st pa:hasProgramPoint ?pp)
+
+#		(1 1 completed(?st,?cond,?iter,?baseConditions))
+#		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+# Comma op Completed
+[
+		(1 1 completed(?prev,?cond,?iter,?baseConditions)),
+		(1 1 updateOtherVarCompleted(?prev,?cond))
+		(?st pa:hasProgramPoint ?pp)
+		(?prev c:hasExpression ?expr),
+		(?expr c:hasParent ?par)
+		(?par rdf:type c:CommaOp),
+		(?par c:hasRightOperand ?prev)
+		(?par c:hasParent ?st)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+#		remove(0)
+#		print('Comma op completed in forInit'),
+#		print('prevprev:', ?prevprev, ' prev:', ?prev, ' st:', ?st)
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+

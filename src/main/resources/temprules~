@@ -1,0 +1,100 @@
+
+# List is empty
+# u need to add rdf:rest as rdf:nil
+[updateVarList:
+		(1 1 updateVarList(?st)),
+		(?varList rdf:type pa:varList),	
+		noValue(?varList,rdf:first),
+		(?st rdf:type c:Variable)
+->
+		(?varList rdf:first ?st),
+		(?varList rdf:rest rdf:nil)
+]
+
+# List is not empty.. a bug here: first variable is added twice.
+[updateVarList2:
+		(1 1 updateVarList(?st)),
+		(?varList rdf:type pa:varList),	
+		(?varList rdf:first ?first),
+		(?varList rdf:rest rdf:nil),
+		bound(?first),
+		(?st rdf:type c:Variable),
+		makeTemp(?node)
+->
+		(?varList rdf:rest ?node),
+		(?node rdf:first ?st)
+]
+
+
+# All variables not affected by the current
+# statement retains the same state
+[retainSameStateRule:
+		(1 1 funct1(?curr, ?var, ?pp)),
+		(?prev pa:nextStatement ?curr),
+# prev, curr in same path
+		(?prev pa:hasProgramPoint ?pp1),
+		(?var2 rdf:type c:Variable),
+# ?var2 in scope		
+		(?var2 pa:hasVariableState ?vs2),
+		(?vs2 pa:atProgramPoint ?pp1)
+->
+		(?vs2 pa:atProgramPoint ?pp),
+		(?curr pa:isProcessed true)
+]
+
+
+
+
+# After executing a statement in a path, control to be
+# transferred to next statement in the same path
+[executeNextStatement:
+		(?prev rdf:type ?b),
+		notEqual(?b,c:IfElseStatement),
+		(?prev pa:isProcessed true),
+		(?prev pa:nextStatement ?curr),
+		(?pp1 pa:afterStatement ?prev),
+		(?pp1 pa:hasProgramConditions ?cond),
+->
+		makeInstance(?pp rdf:type pa:ProgramPoint),
+		(?pp pa:afterStatement ?curr)
+		(?pp pa:hasProgramConditions ?cond)
+		(?curr pa:hasProgramPoint ?pp)
+]
+
+
+# statements of the form var = val;
+[assignmentRule: 
+		(?a pa:hasProgramPoint ?pp),
+		(?pp pa:hasProgramConditions ?cond),
+		(?a rdf:type c:ExpressionStatement),
+		(?b rdf:type c:AssignOp),
+		(?b c:hasParent ?a),
+		(?b c:hasLeftOperand ?l),
+		(?l rdf:type c:VariableRef),
+		(?l c:referTo ?var),
+		(?b c:hasRightOperand ?r),
+		(?r rdf:type c:Value),
+		(?r c:hasValue ?val)
+->
+		makeInstance(?var pa:hasVariableState pa:VariableState ?vs),
+		(?vs pa:stateValue ?val),
+		(?vs pa:sateRelation pa:equalTo),
+		(?vs pa:atProgramPoint ?pp),
+		(1 1 funct1(?a, ?var, ?pp))
+]
+
+
+
+ 
+file0:5_2_12_2 pa:nextStatement file0:14_2_14_8 .
+
+file0:10_15_10_15 pa:nextStatement file0:10_9_10_13 .
+file0:10_9_10_13 pa:nextStatement file0:10_3_10_17 . 
+file0:10_3_10_17 pa:nextStatement file0:11_10_11_10 .
+file0:11_10_11_10 pa:nextStatement file0:11_3_11_8 .
+
+
+
+file0:10_3_10_17 pa:nextStatement file0:11_3_11_12 .
+file0:11_3_11_12 pa:nextStatement file0:14_2_14_8.
+file0:14_2_14_8 rdf:type pa:endExecutionStatement .

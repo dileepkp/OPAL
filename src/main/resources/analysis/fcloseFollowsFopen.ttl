@@ -1,0 +1,48 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+# fclose follows fopen. Before end of function, variable reference is maintained
+pa:queryList pa:contains pa:1_0 .
+pa:1_0 rdf:type pa:query .
+pa:1_0 pa:programPointSettings pa:postCall .
+pa:1_0 pa:queryModel pa:VarRelVal .
+pa:1_0 pa:hasQueryCondition pa:1_2 .
+pa:1_2 pa:hasLHS pa:1_3 .
+pa:1_3 pa:queryConditionType pa:variable .
+pa:1_3 pa:queryConditionSource pa:sparql .
+pa:1_3 pa:value ''' SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType) 
+        WHERE {
+                {
+		?exp rdf:type c:ReturnStatement.
+		?exp c:hasParent* ?func .
+		}
+		UNION
+		{
+		?exp pa:endExecutionInFunction ?func.
+#		filter(!regex(str(?exp),'.*exit'))
+		}
+		?var rdf:type c:VariableDecl .
+		?var c:hasBaseType c:_IO_FILE .
+		?var c:hasParent* ?func .
+		?var pa:hasPointerState ?ps . 
+		?ps pa:pointsToResource ?res .
+		?ps pa:atProgramPoint/pa:afterStatement ?exp.
+		?var2 c:hasBaseType c:_IO_FILE .
+		MINUS{
+		?var2 c:hasScope ?scope.
+		?scope rdf:type c:Global .
+		?var2 pa:hasPointerState ?ps2 . 
+		?ps2 pa:pointsToResource ?res . 
+		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
+}
+            }''' .
+pa:1_2 pa:hasRHS pa:1_4 .
+pa:1_4 pa:queryConditionType pa:value .
+pa:1_4 pa:dataType xsd:int .
+pa:1_4 pa:value 0 .
+pa:1_2 pa:hasRelation pa:1_5 .
+pa:1_5 pa:value pa:notEqual .

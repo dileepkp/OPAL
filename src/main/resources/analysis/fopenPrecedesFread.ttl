@@ -1,0 +1,37 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+#fopen doesn't precede fread
+# output is list of freads
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:queryType pa:EnumQuery.
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:SPARQL .
+pa:0_0 pa:hasQuery pa:0_2 .
+pa:0_2 pa:value ''' SELECT DISTINCT ?exp 
+        WHERE {
+		?expb4 pa:nextStatement ?exp.
+                ?exp rdf:type c:ExpressionStatement.
+		?exp c:hasExpression ?func.
+              ?func rdf:type c:FunctionCall.
+		?func c:call ?call.
+		?call rdf:type c:FunctionRef.
+		?call c:hasName 'fscanf'.
+		?func c:hasArgumentExpr ?y.
+		?y c:NthArg '0'.
+		?y c:referTo ?var.
+
+		?var pa:hasPointerState ?ps . 
+		?ps pa:atProgramPoint ?pp.
+		?pp pa:afterStatement ?expb4.
+		FILTER NOT EXISTS { ?ps pa:stateValue ?val. }
+
+
+
+            }''' .

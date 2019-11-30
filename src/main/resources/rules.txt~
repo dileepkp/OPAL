@@ -1,0 +1,65 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+
+[beginExecution:
+		(?st rdf:type pa:beginExecutionStatement),
+		makeTemp(?pp), 
+		makeTemp(?cond),
+#list of variables
+		makeTemp(?varList)
+		
+->
+		(?pp rdf:type pa:ProgramPoint),
+		(?cond rdf:type rdf:list),
+		(?cond rdf:first 'true'),
+		(?cond rdf:rest rdf:nil),
+		(?pp pa:afterStatement ?st),
+		(?pp pa:hasProgramConditions ?cond),
+		(?varList rdf:type rdf:list),
+		(?varList rdf:type pa:varList),
+		(1 1 makeVS(?st, ?pp, ?cond))
+
+]
+
+[makeVariableState:
+		(1 1 makeVS(?st, ?pp, ?cond)),
+		(?st rdf:type c:Variable),
+		noValue(?st,c:hasInitializer),
+		(?st c:hasType c:pointer_type),
+		makeTemp(?ps)
+->
+		(?st pa:hasPointerState ?ps),
+		(?ps pa:atProgramPoint ?pp),
+		(1 1 updateVarList(?st))
+]
+
+# List is empty
+[updateVarList:
+		(1 1 updateVarList(?st)),
+		(?varList rdf:type pa:varList),	
+		noValue(?varList,rdf:first),
+		(?st rdf:type c:Variable)
+->
+		(?varList rdf:first ?st)
+#		(?varList rdf:rest rdf:nil)
+]
+
+# List is not empty.. a bug here: first variable is added twice.
+[updateVarList2:
+		(1 1 updateVarList(?st)),
+		(?varList rdf:type pa:varList),	
+		(?varList rdf:first ?first),
+		bound(?first),
+		(?st rdf:type c:Variable),
+		makeTemp(?node)
+->
+		(?varList rdf:rest ?node),
+		(?node rdf:first ?st)
+]
+
+

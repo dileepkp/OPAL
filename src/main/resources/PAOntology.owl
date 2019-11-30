@@ -1,0 +1,915 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#"
+     xml:base="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ProgramAnalysisOntology="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology">
+        <owl:imports rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c/1.0.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#afterStatement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#afterStatement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#atProgramPoint -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#atProgramPoint">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#beforeStatement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#beforeStatement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#beginExecution -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#beginExecution">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#FunctionDefinition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#componentSource -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#componentSource">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#componentType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#componentType">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasArrayState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasArrayState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasCapacity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasCapacity">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasField">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasFieldState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasFieldState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasLHS -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasLHS">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasPointerState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasPointerState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#PointerDecl"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#PointerState"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasProgramConditions -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasProgramConditions">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasProgramPath -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasProgramPath">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasQueryClause -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasQueryClause">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRHS -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRHS">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRelation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRelation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasSize -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasSize">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasStructureState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasStructureState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasVariableState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasVariableState">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#VariableDecl"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VariableState"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifFalse_Statement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifFalse_Statement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#SelectionStatement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifTrue_Statement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifTrue_Statement">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#SelectionStatement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lowerBound -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lowerBound">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#memoryUnits -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#memoryUnits">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#nextStatment -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#nextStatment">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#offset -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#offset">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#pointsToResource -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#pointsToResource">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateRel -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateRel">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#EqualityOp"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#RelationalOp"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateVal -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateVal">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#upperBound -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#upperBound">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#hasValue -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#hasValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#OWLObjectProperty_622e2417_74fe_49d3_a2e6_3708969210cb -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#OWLObjectProperty_622e2417_74fe_49d3_a2e6_3708969210cb">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:label xml:lang="en">timeStamp</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#OWLObjectProperty_644ee1a1_9704_47ee_b437_4722a3722321 -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#OWLObjectProperty_644ee1a1_9704_47ee_b437_4722a3722321">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysisProperty"/>
+        <rdfs:label xml:lang="en">hasState</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#first -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#rest -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#dataTypeSize -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#dataTypeSize">
+        <rdfs:domain rdf:resource="http://www.openk.org/ontologies/c#BasicType"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#truthValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#truthValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramCondition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#BasicType -->
+
+    <owl:Class rdf:about="http://www.openk.org/ontologies/c#BasicType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#MemoryUnitsType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ArrayState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ArrayState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ConditionalStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ConditionalStatement">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#ForStatement"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfElseStatement"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfStatement"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#WhileStatement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifFalse_Statement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ifTrue_Statement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#EnumClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#EnumClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#QueryClause"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasLHS"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#RelationClause"/>
+        <owl:disjointWith>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRHS"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRelation"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:disjointWith>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#Interval -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#Interval">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#MemoryObject -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#MemoryObject">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#MemoryUnitsType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#MemoryUnitsType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#PointerState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#PointerState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#atProgramPoint"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPoint"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#pointsToResource"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateRel"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateVal"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramCondition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramCondition">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPath -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPath">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ConditionalStatement"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPath"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPoint -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPoint">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#afterStatement"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasProgramPath"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPath"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#Query -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#Query">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasQueryClause"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#QueryClause"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#QueryClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#QueryClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#RelationClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#RelationClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#QueryClause"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasLHS"/>
+                        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRHS"/>
+                        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#hasRelation"/>
+                        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#SetOfConstants -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#SetOfConstants">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StructureState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StructureState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VarRelValClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VarRelValClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#RelationClause"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VarRelVarClause"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VarRelVarClause -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VarRelVarClause">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#RelationClause"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VariableState -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#VariableState">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramAnalysis"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#atProgramPoint"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#ProgramPoint"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateRel"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#stateVal"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#EqualityOp -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#EqualityOp"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#ExpressionStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#ExpressionStatement">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#nextStatment"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#ForStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#ForStatement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#FunctionDefinition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#FunctionDefinition"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfElseStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfElseStatement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#IfStatement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#PointerDecl -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#PointerDecl"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#RelationalOp -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#RelationalOp"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#SelectionStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#SelectionStatement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#Statement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#VariableDecl -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#VariableDecl"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#WhileStatement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#WhileStatement"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#float -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#float">
+        <dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#int -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#int">
+        <dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openk.org/ontologies/c#short -->
+
+    <owl:NamedIndividual rdf:about="http://www.openk.org/ontologies/c#short">
+        <dataTypeSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</dataTypeSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#constant -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#constant">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#equals -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#equals">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#expression -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#expression">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#garbageValue -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#garbageValue">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#greaterThan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#greaterThan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#greaterThanOrEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#greaterThanOrEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#interval -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#interval">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lessThan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lessThan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lessThanOrEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#lessThanOrEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#notEqualTo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#notEqualTo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateRelationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#runTimeValue -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#runTimeValue">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#setOfConstants -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#setOfConstants">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#setOfIntervals -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#setOfIntervals">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#StateValueType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#sparql -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology#sparql"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

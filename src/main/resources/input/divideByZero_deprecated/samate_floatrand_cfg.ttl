@@ -1,0 +1,154 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix file0: <ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_floatrand.c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+
+file0:26_5_26_14 pa:beginExecutionInFunction file0:25_1_42_1 .
+file0:26_5_26_14 pa:firstStatementInFunction file0:25_1_42_1 .
+file0:26_5_26_14 pa:nextStatement file0:26_17_26_26 .
+file0:26_17_26_26 pa:nextStatement file0:26_29_26_33 .
+file0:26_29_26_33 pa:nextStatement file0:28_5_28_16 .
+file0:29_5_33_5 pa:nextTrueStatement file0:32_9_32_31 .
+file0:29_5_33_5_exit c:hasParent file0:29_5_33_5 .
+file0:32_9_32_31 pa:nextStatement file0:29_5_33_5_exit .
+file0:29_5_33_5_exit c:hasParent file0:29_5_33_5 .
+file0:29_5_33_5 pa:nextFalseStatement file0:29_5_33_5_exit .
+file0:28_5_28_16 pa:nextStatement file0:29_5_33_5 .
+file0:38_13_38_41 pa:nextStatement file0:39_13_39_33 .
+file0:34_5_41_5 pa:nextTrueStatement file0:38_13_38_41 .
+file0:34_5_41_5_exit c:hasParent file0:34_5_41_5 .
+file0:39_13_39_33 pa:nextStatement file0:34_5_41_5_exit .
+file0:34_5_41_5_exit c:hasParent file0:34_5_41_5 .
+file0:34_5_41_5 pa:nextFalseStatement file0:34_5_41_5_exit .
+file0:29_5_33_5_exit c:hasParent file0:29_5_33_5 .
+file0:29_5_33_5_exit pa:nextStatement file0:34_5_41_5 .
+file0:34_5_41_5_exit c:hasParent file0:34_5_41_5 .
+
+
+file0:34_5_41_5_exit pa:endExecutionInFunction file0:25_1_42_1 .
+
+
+file0:51_5_51_14 pa:beginExecutionInFunction file0:50_1_77_1 .
+file0:51_5_51_14 pa:firstStatementInFunction file0:50_1_77_1 .
+file0:51_5_51_14 pa:nextStatement file0:51_17_51_26 .
+file0:51_17_51_26 pa:nextStatement file0:53_5_53_16 .
+file0:54_5_58_5 pa:nextTrueStatement file0:57_9_57_31 .
+file0:54_5_58_5_exit c:hasParent file0:54_5_58_5 .
+file0:57_9_57_31 pa:nextStatement file0:54_5_58_5_exit .
+file0:54_5_58_5_exit c:hasParent file0:54_5_58_5 .
+file0:54_5_58_5 pa:nextFalseStatement file0:54_5_58_5_exit .
+file0:53_5_53_16 pa:nextStatement file0:54_5_58_5 .
+file0:59_5_76_5 pa:nextTrueStatement file0:62_9_62_42 .
+file0:59_5_76_5_exit c:hasParent file0:59_5_76_5 .
+file0:62_9_62_42 pa:nextStatement file0:59_5_76_5_exit .
+file0:69_13_69_41 pa:nextStatement file0:70_13_70_33 .
+file0:67_9_75_9 pa:nextTrueStatement file0:69_13_69_41 .
+file0:67_9_75_9_exit c:hasParent file0:67_9_75_9 .
+file0:70_13_70_33 pa:nextStatement file0:67_9_75_9_exit .
+file0:67_9_75_9 pa:nextFalseStatement file0:74_13_74_63 .
+file0:67_9_75_9_exit c:hasParent file0:67_9_75_9 .
+file0:74_13_74_63 pa:nextStatement file0:67_9_75_9_exit .
+file0:59_5_76_5 pa:nextFalseStatement file0:67_9_75_9 .
+file0:67_9_75_9_exit c:hasParent file0:67_9_75_9 .
+file0:59_5_76_5_exit c:hasParent file0:59_5_76_5 .
+file0:67_9_75_9_exit pa:nextStatement file0:59_5_76_5_exit .
+file0:54_5_58_5_exit c:hasParent file0:54_5_58_5 .
+file0:54_5_58_5_exit pa:nextStatement file0:59_5_76_5 .
+file0:59_5_76_5_exit c:hasParent file0:59_5_76_5 .
+
+
+file0:59_5_76_5_exit pa:endExecutionInFunction file0:50_1_77_1 .
+
+
+file0:82_5_82_14 pa:beginExecutionInFunction file0:81_1_103_1 .
+file0:82_5_82_14 pa:firstStatementInFunction file0:81_1_103_1 .
+file0:82_5_82_14 pa:nextStatement file0:84_5_84_16 .
+file0:85_5_89_5 pa:nextTrueStatement file0:88_9_88_31 .
+file0:85_5_89_5_exit c:hasParent file0:85_5_89_5 .
+file0:88_9_88_31 pa:nextStatement file0:85_5_89_5_exit .
+file0:85_5_89_5_exit c:hasParent file0:85_5_89_5 .
+file0:85_5_89_5 pa:nextFalseStatement file0:85_5_89_5_exit .
+file0:84_5_84_16 pa:nextStatement file0:85_5_89_5 .
+file0:95_13_95_22 pa:nextStatement file0:96_13_96_33 .
+file0:93_9_101_9 pa:nextTrueStatement file0:95_13_95_22 .
+file0:93_9_101_9_exit c:hasParent file0:93_9_101_9 .
+file0:96_13_96_33 pa:nextStatement file0:93_9_101_9_exit .
+file0:93_9_101_9 pa:nextFalseStatement file0:100_13_100_63 .
+file0:93_9_101_9_exit c:hasParent file0:93_9_101_9 .
+file0:100_13_100_63 pa:nextStatement file0:93_9_101_9_exit .
+file0:90_5_102_5 pa:nextTrueStatement file0:93_9_101_9 .
+file0:93_9_101_9_exit c:hasParent file0:93_9_101_9 .
+file0:90_5_102_5_exit c:hasParent file0:90_5_102_5 .
+file0:93_9_101_9_exit pa:nextStatement file0:90_5_102_5_exit .
+file0:90_5_102_5_exit c:hasParent file0:90_5_102_5 .
+file0:90_5_102_5 pa:nextFalseStatement file0:90_5_102_5_exit .
+file0:85_5_89_5_exit c:hasParent file0:85_5_89_5 .
+file0:85_5_89_5_exit pa:nextStatement file0:90_5_102_5 .
+file0:90_5_102_5_exit c:hasParent file0:90_5_102_5 .
+
+
+file0:90_5_102_5_exit pa:endExecutionInFunction file0:81_1_103_1 .
+
+
+file0:108_5_108_14 pa:beginExecutionInFunction file0:107_1_129_1 .
+file0:108_5_108_14 pa:firstStatementInFunction file0:107_1_129_1 .
+file0:108_5_108_14 pa:nextStatement file0:110_5_110_16 .
+file0:110_5_110_16 pa:nextStatement file0:110_18_110_27 .
+file0:111_5_120_5 pa:nextTrueStatement file0:114_9_114_42 .
+file0:111_5_120_5_exit c:hasParent file0:111_5_120_5 .
+file0:114_9_114_42 pa:nextStatement file0:111_5_120_5_exit .
+file0:111_5_120_5 pa:nextFalseStatement file0:119_9_119_20 .
+file0:111_5_120_5_exit c:hasParent file0:111_5_120_5 .
+file0:119_9_119_20 pa:nextStatement file0:111_5_120_5_exit .
+file0:110_18_110_27 pa:nextStatement file0:111_5_120_5 .
+file0:125_13_125_41 pa:nextStatement file0:126_13_126_33 .
+file0:121_5_128_5 pa:nextTrueStatement file0:125_13_125_41 .
+file0:121_5_128_5_exit c:hasParent file0:121_5_128_5 .
+file0:126_13_126_33 pa:nextStatement file0:121_5_128_5_exit .
+file0:121_5_128_5_exit c:hasParent file0:121_5_128_5 .
+file0:121_5_128_5 pa:nextFalseStatement file0:121_5_128_5_exit .
+file0:111_5_120_5_exit c:hasParent file0:111_5_120_5 .
+file0:111_5_120_5_exit pa:nextStatement file0:121_5_128_5 .
+file0:121_5_128_5_exit c:hasParent file0:121_5_128_5 .
+
+
+file0:121_5_128_5_exit pa:endExecutionInFunction file0:107_1_129_1 .
+
+
+file0:134_5_134_14 pa:beginExecutionInFunction file0:133_1_150_1 .
+file0:134_5_134_14 pa:firstStatementInFunction file0:133_1_150_1 .
+file0:134_5_134_14 pa:nextStatement file0:134_17_134_26 .
+file0:134_17_134_26 pa:nextStatement file0:136_5_136_16 .
+file0:137_5_141_5 pa:nextTrueStatement file0:140_9_140_20 .
+file0:137_5_141_5_exit c:hasParent file0:137_5_141_5 .
+file0:140_9_140_20 pa:nextStatement file0:137_5_141_5_exit .
+file0:137_5_141_5_exit c:hasParent file0:137_5_141_5 .
+file0:137_5_141_5 pa:nextFalseStatement file0:137_5_141_5_exit .
+file0:136_5_136_16 pa:nextStatement file0:137_5_141_5 .
+file0:146_13_146_41 pa:nextStatement file0:147_13_147_33 .
+file0:142_5_149_5 pa:nextTrueStatement file0:146_13_146_41 .
+file0:142_5_149_5_exit c:hasParent file0:142_5_149_5 .
+file0:147_13_147_33 pa:nextStatement file0:142_5_149_5_exit .
+file0:142_5_149_5_exit c:hasParent file0:142_5_149_5 .
+file0:142_5_149_5 pa:nextFalseStatement file0:142_5_149_5_exit .
+file0:137_5_141_5_exit c:hasParent file0:137_5_141_5 .
+file0:137_5_141_5_exit pa:nextStatement file0:142_5_149_5 .
+file0:142_5_149_5_exit c:hasParent file0:142_5_149_5 .
+
+
+file0:142_5_149_5_exit pa:endExecutionInFunction file0:133_1_150_1 .
+
+
+file0:154_5_154_15 pa:beginExecutionInFunction file0:153_1_158_1 .
+file0:154_5_154_15 pa:firstStatementInFunction file0:153_1_158_1 .
+file0:154_5_154_15 pa:nextStatement file0:155_5_155_15 .
+file0:155_5_155_15 pa:nextStatement file0:156_5_156_15 .
+file0:156_5_156_15 pa:nextStatement file0:157_5_157_15 .
+
+
+file0:157_5_157_15 pa:endExecutionInFunction file0:153_1_158_1 .

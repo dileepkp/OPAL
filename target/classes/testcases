@@ -1,0 +1,14 @@
+./464.h264ref-src/leaky_bucket.c (3 fclose operations) 294 lines
+
+./454.calculix-src/spooles/iv/src/IV_IO.c (6 fclose operations) 515 lines
+Can use any of the files in this folder
+
+ ./454.calculix-src/spooles/dv/src/DV_IO.c  (6 fclose operations)
+
+
+./482.sphinx3-src/feat.c (18 fclose) 1270 lines
+./482.sphinx3-src/profile.c (4 fclose) 324 lines
+
+
+
+

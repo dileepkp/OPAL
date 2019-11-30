@@ -1,0 +1,64 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix file0: <ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/divideByZero/samate_rand.c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+file0:25_5_25_12 pa:beginExecutionInFunction file0:24_1_36_1 .
+file0:25_5_25_12 pa:firstStatementInFunction file0:24_1_36_1 .
+file0:25_5_25_12 pa:nextStatement file0:25_5_25_21 .
+file0:25_5_25_21 pa:nextStatement file0:25_5_25_27 .
+file0:25_5_25_27 pa:nextStatement file0:27_5_27_14 .
+file0:27_5_27_14 pa:nextStatement file0:29_5_29_20 .
+file0:31_9_31_24 pa:nextStatement file0:32_9_32_25 .
+file0:32_9_32_25 pa:nextStatement file0:34_9_34_34 .
+file0:29_5_29_20 pa:nextStatement file0:31_9_31_24 .
+
+
+file0:34_9_34_34 pa:endExecutionInFunction file0:24_1_36_1 .
+
+
+file0:45_5_45_12 pa:beginExecutionInFunction file0:44_1_56_1 .
+file0:45_5_45_12 pa:firstStatementInFunction file0:44_1_56_1 .
+file0:45_5_45_12 pa:nextStatement file0:45_5_45_21 .
+file0:45_5_45_21 pa:nextStatement file0:45_5_45_27 .
+file0:45_5_45_27 pa:nextStatement file0:47_5_47_14 .
+file0:47_5_47_14 pa:nextStatement file0:49_5_49_13 .
+file0:51_9_51_24 pa:nextStatement file0:52_9_52_25 .
+file0:52_9_52_25 pa:nextStatement file0:54_9_54_34 .
+file0:49_5_49_13 pa:nextStatement file0:51_9_51_24 .
+
+
+file0:54_9_54_34 pa:endExecutionInFunction file0:44_1_56_1 .
+
+
+file0:61_5_61_12 pa:beginExecutionInFunction file0:60_1_79_1 .
+file0:61_5_61_12 pa:firstStatementInFunction file0:60_1_79_1 .
+file0:61_5_61_12 pa:nextStatement file0:61_5_61_21 .
+file0:61_5_61_21 pa:nextStatement file0:61_5_61_27 .
+file0:61_5_61_27 pa:nextStatement file0:63_5_63_14 .
+file0:63_5_63_14 pa:nextStatement file0:65_5_65_20 .
+file0:67_9_67_24 pa:nextStatement file0:68_9_68_25 .
+file0:70_9_77_9 pa:nextTrueStatement file0:72_13_72_38 .
+file0:70_9_77_9_exit c:hasParent file0:70_9_77_9 .
+file0:72_13_72_38 pa:nextStatement file0:70_9_77_9_exit .
+file0:70_9_77_9 pa:nextFalseStatement file0:76_13_76_63 .
+file0:70_9_77_9_exit c:hasParent file0:70_9_77_9 .
+file0:76_13_76_63 pa:nextStatement file0:70_9_77_9_exit .
+file0:68_9_68_25 pa:nextStatement file0:70_9_77_9 .
+file0:65_5_65_20 pa:nextStatement file0:67_9_67_24 .
+file0:70_9_77_9_exit c:hasParent file0:70_9_77_9 .
+
+
+file0:70_9_77_9_exit pa:endExecutionInFunction file0:60_1_79_1 .
+
+
+file0:83_5_83_14 pa:beginExecutionInFunction file0:82_1_85_1 .
+file0:83_5_83_14 pa:firstStatementInFunction file0:82_1_85_1 .
+file0:83_5_83_14 pa:nextStatement file0:84_5_84_14 .
+
+
+file0:84_5_84_14 pa:endExecutionInFunction file0:82_1_85_1 .

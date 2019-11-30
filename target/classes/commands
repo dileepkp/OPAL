@@ -1,0 +1,10 @@
+    mvn install:install-file -Dfile=/home/aidb/Documents/z3/build/com.microsoft.z3.jar -DgroupId=com.microsoft -DartifactId=libz3java  -Dversion=1.0 -Dpackaging=jar
+
+java -Djava.library.path="/home/aidb/Dropbox/BugFinderJena/src/lib"
+
+export LD_LIBRARY_PATH="/home/aidb/Dropbox/BugFinderJena/src/lib"
+
+
+java -Djava.library.path="/home/aidb/jdk1.8.0_40/jre/lib/amd64"
+
+java -Djava.library.path="/usr/lib64"

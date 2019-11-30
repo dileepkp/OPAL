@@ -1,0 +1,55 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:queryType pa:EnumQuery.
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:SPARQL .
+pa:0_0 pa:hasQuery pa:0_2 .
+pa:0_2 pa:value ''' select (?st as ?exp)
+where {
+?st rdf:type c:ForStatement.
+?st c:hasForInit ?init .
+?st c:hasForTest ?test .
+?st c:hasForIncr ?incr .
+{
+?init c:hasExpression ?einit.
+?einit rdf:type c:AssignOp.
+?einit c:hasLeftOperand ?linit.
+?linit c:referTo ?initVar.
+}
+UNION
+{
+?init rdf:type c:VariableDecl.
+?ass rdf:type c:AssignInitializer .
+?ass c:hasParent ?init .
+BIND(?init as ?initVar).
+}
+?test rdf:type ?testType.
+?test (c:hasLeftOperand | c:hasRightOperand) ?optest.
+?optest c:referTo ?initVar.
+FILTER(?testType IN (c:LessOp, c:GreaterOp, c:LeqOp, c:GeqOp)).
+{
+?incr rdf:type ?incrType.
+?incr (c:hasOperand | c:hasLeftOperand ) ?op.
+?op c:referTo ?initVar.
+FILTER(?incrType IN (c:PostfixIncrementOp, c:PostfixDecrementOp, c:AddAssignOp, c:SubAssignOp)).
+}
+UNION
+{
+?incr rdf:type c:AssignOp.
+?incr c:hasLeftOperand ?op.
+?op c:referTo ?initVar.
+?incr c:hasRightOperand ?rincr.
+?rincr rdf:type ?incrType.
+?rincr (c:hasLeftOperand | c:hasRightOperand) ?opincr.
+?opincr c:referTo ?initVar.
+FILTER(?incrType IN (c:AddOp, c:SubOp)).
+}
+
+}''' .

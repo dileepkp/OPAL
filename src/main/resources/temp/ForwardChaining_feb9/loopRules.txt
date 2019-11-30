@@ -1,0 +1,195 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+@prefix fl: <http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#> .
+# @prefix file0: <ftp:/home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#> .
+
+# for has hasForTest; while has hasCondition
+
+# Analyze For statement
+[ForStatement1:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement),
+		(?st c:hasParent ?forSt),
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		noValue(?forSt, pa:iteration)
+		(?forSt c:hasCondition ?st)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 createNoConditionList(?st,?cond,?st,?iter,?baseConditions,?forSt,?iter))		
+		(1 1 createYesConditionList2(?st,?cond,?st,1,?baseConditions,?prev,?pp))
+		
+#		(?forSt pa:previousIterationIndex_0 ?iter)
+
+#		(?forSt pa:iterationIndexEnable_0 ?cond)
+#The above one seems redundant
+		(?forSt pa:iterationIndex func1(?cond,?iter))
+
+		
+#		(?forSt pa:iteration 1)
+		print('for st1')
+]
+
+# Analyze For statement.
+[ForStatement2:
+		(1 1 execute2(?prev,?st,?cond,?pp,?newI))
+		(?st rdf:type c:ExpressionStatement)
+		(?st c:hasParent ?forSt)
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		(?forSt c:hasCondition ?st)
+		ge(?newI,2)
+		le(?newI,2)
+#to increase iteration count change above to 3
+#		equal(?newI,2)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+
+->
+
+# Nov 29		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1)) 
+		(1 1 createYesConditionList2(?st,?cond,?st,?newI,?baseConditions,?prev,?pp))
+
+		print('for st2',?st,?cond)
+]
+
+# Analyze For statement.
+[ForStatement3:
+		(1 1 execute2(?prev,?st,?cond,?pp,?newI)),
+		(?st rdf:type c:ExpressionStatement),
+		(?st c:hasParent ?forSt),
+		(?loopList rdf:type pa:loopList)
+		(?loopList rdf:item ?loopItem)
+		(?forSt rdf:type ?loopItem)
+		(?forSt c:hasCondition ?st)
+
+		equal(?newI,3)
+#to increase iteration count change above to 4
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+		remove(0)
+		(1 1 createNoConditionList2(?st,?cond,?st,?newI,?baseConditions,?prev,?pp,?forSt))
+		print('for st3',?st,?cond)
+]
+
+
+
+# ForIncr Statemen
+[forIncrStatement1:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:PostfixIncrementOp)
+		(?st c:hasParent ?forSt)
+		(?forSt c:hasForIncr ?st)
+		(?pp pa:iteration ?i)
+		le(?i,1)
+		addOne(?i,?newI)		
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+
+		(?varList rdf:type pa:varList)
+		(?varList pa:baseConditions ?baseConditions)
+		(?varList rdf:item ?var)
+		
+		(?var pa:hasPointerState ?ps2)
+		(?ps2 pa:atProgramPoint ?prevPP)
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter3)
+		(?pp pa:iteration ?iter3)
+		(?pp pa:baseConditions ?baseConditions)
+		(?ps2 pa:stateValue ?concreteVal)
+		addOne(?concreteVal,?newVal)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+		
+
+->
+		remove(0)
+		(1 1 makePS2(?var, ?pp, ?cond,?newVal, pa:equals))
+		print('for incr',?newI,?st,?cond),		
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter3,?iter3)),
+		
+#		(1 1 fixpointVerify(?st,?cond,?forSt,?newI,?i,?concreteVal,?ps,?newVal))		
+		(1 1 completedForIncr(?st,?cond,?forSt,?newI,?baseConditions))
+
+
+
+]
+
+
+# ForIncr Statemen
+[forIncrStatement2:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:PostfixIncrementOp)
+		(?st c:hasParent ?forSt)
+		(?forSt c:hasForIncr ?st)
+		(?pp pa:iteration ?i)
+		ge(?i,2)
+		addOne(?i,?newI)		
+		(?st c:hasOperand ?operand)
+		(?st c:hasType ?dt)
+		(?operand rdf:type c:VariableRef)
+		(?operand c:referTo ?var)
+#		makeTemp(?ps)
+		(?pp pa:baseConditions ?baseConditions)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+->
+		remove(0)
+		(1 1 makePS2(?var, ?pp, ?cond,pa:constant1, pa:equals))
+		print('for incr2',?i,?st,?cond),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?i,?i)),
+		
+#		(1 1 fixpointVerify(?st,?cond,?forSt,?newI,?i,?concreteVal,?ps,?newVal))		
+		(1 1 completedForIncr(?st,?cond,?forSt,?newI,?baseConditions))
+
+]
+
+
+# WhileLast Statemen
+[WhileLastStatement1:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st pa:lastStatementInLoop ?forSt)
+		(?pp pa:iteration ?i)
+		le(?i,1)
+		addOne(?i,?newI)		
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+#		remove(0) never remove comment as another rule gets fired from this
+		print('while last',?i,?st,?cond),		
+		(1 1 completedForIncr(?st,?cond,?forSt,?newI,?baseConditions))
+
+]
+
+
+# WhileLast Statemen
+[WhileLastStatement2:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st pa:lastStatementInLoop ?forSt)
+		(?pp pa:iteration ?i)
+		ge(?i,2)
+		addOne(?i,?newI)		
+		(?pp pa:baseConditions ?baseConditions)
+
+->
+#		remove(0)
+		print('while last2',?i,?st,?cond),
+		(1 1 completedForIncr(?st,?cond,?forSt,?newI,?baseConditions))
+
+]
+

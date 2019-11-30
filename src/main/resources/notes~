@@ -1,0 +1,40 @@
+
+All preconditions can be queries. Few standard analysis techniques can be coded as preconditions. A query can be precondition (if you want to run a standard analysis) or can be specified using query keyword.
+
+What can be a query? What is the query language?
+
+A query is specified at a program point. The query has specific conditions which must be satisfied (query conditons). 
+
+pending: 
+	1) Convert swrl rules to jena automatically
+
+	2) Develop a file library ontology by importing c ontology and program analysis ontology
+
+	3) File *fp; fp = fopen(--); write rule for this
+
+	4) pa:negItem, pa:listItem instead of rdf:item
+
+	5) i=0 is converted as "0" in rose compiler; bug; change it to 0 as increment is not working
+
+	6) file0:84_21_84_24 pa:nextStatement file0:84_33_84_35 .
+
+		file0:84_21_84_24 pa:beginExecutionInFunction file0:84_38_104_1 .
+		file0:84_21_84_24 pa:nextStatement file0:85_3_85_7 .
+	
+	7) skip ip call var = func(); update var(var)
+
+	8) what will happen to skip func call; if one of them is a file parameter and the other is not
+
+	9) break and continue in a while loop and while loop iterations
+
+	10) same func call invoked multiple times
+
+	11) fseek and ftell functions
+
+	12)In word2vec.c observer the following
+file0:770_3_773_29 c:hasTrueBody file0:0_0_0_0:770_3_773_29 .
+file0:770_3_773_29 c:hasFalseBody file0:0_0_0_0:770_3_773_29 .
+
+	13)
+
+

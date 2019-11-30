@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<queries>
+
+    <query id="0">
+        PREFIX c:&lt;http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#&gt;
+        PREFIX file0:&lt;file:///home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/writeToFile.c#&gt;
+        PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+        PREFIX pa:&lt;http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#&gt;
+        PREFIX fl:&lt;http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#&gt;
+
+    </query>
+
+
+    <query id="1">
+        SELECT ?s ?p ?o
+        WHERE {
+         ?s ?p ?o.
+        }
+
+    </query>
+    
+     <query id="getNext">
+        SELECT ?s ?o
+        WHERE {
+         ?s rdf:type ?o.
+        }
+
+    </query>
+
+ 
+  
+    <!-- Select the program conditions that reach the query statement -->  
+    
+  <query id="2">
+        SELECT DISTINCT ?qp ?pred (?o as ?condition) (?cond as ?pathId) ?iter (count(?temp) as ?order)
+        WHERE {
+<!--	 ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp. -->
+         ?pp pa:afterStatement ?qp.
+	 ?pp pa:iteration ?iter.
+         ?pp pa:hasProgramConditions ?cond.
+         ?cond (rdf:item)* ?temp.
+	 ?temp ?tempPred ?o.
+	 optional {?temp pa:sameState ?cond4. }
+	FILTER(!isBlank(?o) &amp;&amp; ?o != "true"  &amp;&amp; (?tempPred = rdf:item || ?tempPred = pa:negItem)).
+	bind(if(bound(?cond4),"*" ,?tempPred) as ?pred).
+        }
+	group by ?qp ?pred ?o ?cond ?iter
+	order by ?qp
+    </query>
+
+ <query id="2_backup">
+        SELECT DISTINCT ?qp ?pred (?o as ?condition) (?cond as ?pathId) ?iter (count(?temp) as ?order)
+        WHERE {
+<!--	 ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp. -->
+         ?pp pa:afterStatement ?qp.
+         ?pp pa:hasProgramConditions ?cond.
+	 ?pp pa:iteration ?iter.
+         ?cond (rdf:item)* ?temp.
+	 ?temp ?pred ?o.
+	FILTER(!isBlank(?o) &amp;&amp; ?o != "true"  &amp;&amp; (?pred = rdf:item || ?pred = pa:negItem)).
+        }
+	group by ?qp ?pred ?o ?cond ?iter
+	order by ?qp
+    </query>
+    
+    
+    <!-- Select variables -->
+    <query id="3">
+        SELECT distinct ?var
+        WHERE {
+         ?var rdf:type c:Variable.
+        }
+    </query>
+    
+     <!-- Select the values of the variables which reaches the query statement  precall -->  
+     <query id="4">
+        SELECT ?qp ?var ?val ?relation ?pathId
+        WHERE {
+         ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp.
+         ?var pa:hasPointerState ?ps.
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?st.
+	?pp pa:hasProgramConditions ?pathId.
+         ?ps pa:stateValue ?val.
+         ?ps pa:stateRelation ?relation.
+         }
+    </query>
+
+ <!-- Select the values of the variables which reaches the query statement postcall -->  
+     <query id="5">
+        SELECT ?qp ?var ?val ?relation ?pathId ?ps
+        WHERE {
+       <!--  ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp. -->
+         ?var pa:hasPointerState ?ps.
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?qp.
+	?pp pa:hasProgramConditions ?pathId.
+         ?ps pa:stateValue ?val.
+         ?ps pa:stateRelation ?relation.
+         }
+    </query>
+    
+    <!-- Translate the program conditions to z3 conditons-->
+    <!-- var and val combinations -->
+    <query id="101">
+        SELECT ?exp ?var ?op ?val ?dataType (1 as ?type) 
+        WHERE {
+        ?exp rdf:type c:ExpressionStatement.
+        ?exp rdf:type ?op .
+        ?exp c:hasLeftOperand ?lval .
+        { 
+	?exp c:hasRightOperand ?rval . 
+	?rval rdf:type c:CastOp .
+        ?rval c:hasOperand ?rval2 . 
+	}
+	UNION
+	{
+	?exp c:hasRightOperand ?rval2 . 
+	}
+        ?lval rdf:type c:VariableRef .
+        ?lval c:referTo ?var .
+        ?rval2 rdf:type c:Value .
+        ?rval2 c:hasValue ?val .
+        ?rval2 c:hasType ?dataType.
+        FILTER((?op IN (c:EqualOp,c:LeqOp,c:NeqOp)) &amp;&amp; (?dataType IN (c:int))).
+
+<!--	?var pa:hasPointerState ?ps.
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?exp. before or after ?exp doesnt matter-->
+        }
+    </query>
+    
+   <!-- unary conditions (!var) -->
+     <query id="102">
+        SELECT ?exp ?var ?op 
+        WHERE {
+    ?exp rdf:type c:ExpressionStatement .
+  {
+    ?exp rdf:type ?op .
+    ?exp c:hasOperand ?operand.
+    ?operand rdf:type c:VariableRef .
+    ?operand c:referTo ?var .
+    FILTER(?op != c:ExpressionStatement).
+  }
+  UNION
+	{
+	?exp  rdf:type c:VariableRef .
+	?exp c:referTo ?var.
+    BIND(c:NeqOp AS ?op)
+	}
+        }
+    </query>
+
+	<!-- preCallInvalidCond -->
+     <query id="preCallInvalidCond">
+       SELECT DISTINCT ?qp ?pathId (?cond as ?invalidCond) ?var (pa:preCall as ?queryLoc)
+        WHERE {
+         ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp.
+         ?var pa:hasPointerState ?ps.
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?st.
+	?pp pa:hasProgramConditions ?pathId.
+	?pathId rdf:item* ?cond.
+	?stcond c:hasCondition ?cond.
+	
+	 ?var pa:hasPointerState ?ps2.
+         ?ps2 pa:atProgramPoint ?pp2.
+         ?pp2 pa:afterStatement ?stcond.
+	FILTER(?ps != ?ps2)
+
+?cond rdf:type c:ExpressionStatement.
+        ?cond rdf:type ?op .
+        ?cond c:hasLeftOperand ?lval .
+        ?lval rdf:type c:VariableRef .
+        ?lval c:referTo ?var .
+	FILTER(?op IN (c:EqualOp,c:LeqOp,c:NeqOp)).
+         }
+    </query>
+
+	<!-- postCallInvalidCond -->
+     <query id="postCallInvalidCond">
+       SELECT ?qp ?pathId (?cond as ?invalidCond) ?var (pa:postCall as ?queryLoc) 
+        WHERE {
+
+         ?var pa:hasPointerState ?ps.
+         ?ps pa:atProgramPoint ?pp.
+         ?pp pa:afterStatement ?qp.
+	?pp pa:hasProgramConditions ?pathId.
+	?pathId rdf:item* ?cond.
+	?stcond c:hasCondition ?cond.
+	
+	 ?var pa:hasPointerState ?ps2.
+         ?ps2 pa:atProgramPoint ?pp2.
+         ?pp2 pa:afterStatement ?stcond.
+	FILTER(?ps != ?ps2)
+
+?cond rdf:type c:ExpressionStatement.
+        ?cond rdf:type ?op .
+        ?cond c:hasLeftOperand ?lval .
+        ?lval rdf:type c:VariableRef .
+        ?lval c:referTo ?var .
+	FILTER(?op IN (c:EqualOp,c:LeqOp,c:NeqOp)).
+
+         }
+    </query>
+
+
+  
+    
+</queries>

@@ -1,0 +1,59 @@
+@prefix c: <http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pa: <http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#> .
+
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:queryType pa:EnumQuery.
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:SPARQL .
+pa:0_0 pa:hasQuery pa:0_2 .
+#pa:0_2 pa:value ''' select (count(distinct ?st) as ?count)
+#where {
+#?st rdf:type c:ForStatement.
+#{?st pa:beginExecutionInFunction ?func.} union
+#}''' .
+
+pa:0_2 pa:value '''SELECT  (sum(?result) as ?total)
+where{
+
+select ?decl ?func ( sum(?varCount) as ?result) where {
+
+	{
+SELECT ?decl ?func (count(distinct ?st) as ?stCount) WHERE {
+
+?decl rdf:type c:FunctionDecl .
+?decl c:hasDefinition ?func.
+
+{?s1 (pa:nextStatement | pa:nextTrueStatement | pa:nextFalseStatement) ?st } UNION
+{?st pa:beginExecutionInFunction ?func}
+ 
+?st (c:hasParent)* ?func .
+
+}
+group by ?decl ?func
+
+	}
+
+	{
+SELECT ?decl ?func (count(distinct ?var) as ?varCount)  WHERE {
+
+?decl rdf:type c:FunctionDecl .
+?decl c:hasDefinition ?func.
+
+?var rdf:type c:Variable .
+{?var c:hasType ?dataType} union {?var c:hasType c:pointer_type. ?var c:hasBaseType ?dataType.}
+filter(?dataType in (c:char,c:wchar,c:float,c:double,c:long_double,c:int,c:short,c:long_long,c:long,c:signed_char,c:signed_int, c:signed_long,c:signed_long_long,c:signed_short, c:unsigned_char,c:unsigned_long,c:unsigned_long_long,c:unsigned_short,c:unsigned_int, c:_IO_FILE
+))
+?var (c:hasParent)* ?decl .
+
+}
+group by ?decl ?func
+
+	}
+}
+group by ?decl ?func
+}''' .

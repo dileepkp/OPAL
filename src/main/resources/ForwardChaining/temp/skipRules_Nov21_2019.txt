@@ -1,0 +1,110 @@
+
+
+# Assignment Statement i += j
+[AddAssignOpStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type ?opType),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?right c:referTo ?var2),
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+		(c:ArithmeticAssignOp rdf:item ?opType)
+
+->
+		
+#		print('AddAssignOp Statement type i += j'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+
+# Arithmetic Statement i = 1/j
+[arithmeticStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?left c:hasType ?dt)
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		(?right rdf:type ?arithOp)
+
+		(?arithmeticOp rdf:type pa:arithmeticOperators)
+		(?arithmeticOp rdf:item ?arithOp)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+	
+->
+	
+#		print('Arithmetic Statement type i = 1/j;'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+
+# Assignment Statement i = j
+[forInitStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?right c:referTo ?var2),
+		(?left c:hasType ?dt)
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+#		(?intDataTypeList rdf:type pa:intDataTypeList)
+#		noValue(?intDataTypeList,rdf:item,?dt)
+	
+		
+->
+		
+#		print('Skip Assignment Statement type i = j; i not file type'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+
+
+# Assignment Statement i = j
+[forInitStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?op),
+		(?left c:referTo ?var),
+		(?op c:hasOperand ?right)
+		(?right c:referTo ?var2),
+		(?left c:hasType ?dt)
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+#		(?intDataTypeList rdf:type pa:intDataTypeList)
+#		noValue(?intDataTypeList,rdf:item,?dt)
+	
+		
+->
+		
+#		print('Skip Assignment Statement type i = (cast) j; i not file type'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+]
+

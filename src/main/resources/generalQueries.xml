@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<queries>
+
+    <query id="0">
+        PREFIX c:&lt;http://www.semanticweb.org/yzhao30/ontologies/2015/7/c#&gt;
+        PREFIX file0:&lt;ftp:/home/demo/Downloads/PATO-ROSE-master/tools/onto-build-rose/test/word2vec.c#&gt;
+        PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+        PREFIX pa:&lt;http://www.semanticweb.org/aidb/ontologies/BugFindingOntology#&gt;
+        PREFIX fl:&lt;http://www.semanticweb.org/aidb/ontologies/FileLibraryOntology#&gt;
+
+    </query>
+
+
+    <query id="1">
+        SELECT ?s ?p ?o
+        WHERE {
+         ?s ?p ?o.
+        }
+
+    </query>
+
+ <query id="getVariables">
+        SELECT DISTINCT (?s as ?entity)
+        WHERE {
+        ?s rdf:type ?var .
+	?s c:hasType ?intType .
+	filter(?var IN (c:Variable,c:VariableDecl) &amp;&amp; ?intType IN (c:int, c:long_long, c:long, c:unsigned_long, c:unsigned_int))
+        }
+
+    </query>
+
+ <query id="getStatements">
+        SELECT DISTINCT (?s1 as ?entity)
+        WHERE {
+		{?s (pa:nextStatement | pa:nextTrueStatement | pa:nextFalseStatement) ?s1 } UNION
+		{?s1 pa:beginExecutionInFunction ?func}
+        }
+
+    </query>
+
+ <query id="getConditions">
+        SELECT DISTINCT (?c as ?entity) ?func 
+        WHERE {
+	?s1 c:hasCondition ?c .
+	?s1 c:hasParent* ?func.
+	?func rdf:type c:FunctionDefinition.
+        }
+
+    </query>
+
+    
+     <query id="getAllFunctions">
+        SELECT DISTINCT ?s (?func as ?o) ?decl
+        WHERE {
+         ?s pa:beginExecutionInFunction ?func.
+?decl rdf:type c:FunctionDecl .
+?decl c:hasDefinition ?func.
+        }
+    </query>
+
+ <query id="getAllFunctionsWithFclose">
+        SELECT DISTINCT ?s (?func as ?o)
+        WHERE {
+	?s pa:beginExecutionInFunction ?func.
+	?sth c:hasName "fclose" .
+	?sth c:hasParent* ?func .
+        }
+
+    </query>
+
+ <query id="getAllChunks">
+        SELECT (?exit as ?s) (?st as ?o)
+        WHERE {
+		?exit c:hasParent ?par .
+		?par c:hasParent ?func .
+		FILTER (regex(str(?exit), ".*exit") &amp;&amp; ?par != ?func) .
+		?exit pa:nextStatement ?st .
+        }
+	order by ?exit
+    </query>
+
+ <query id="arithmeticExpression">
+         SELECT ?expr ?exprType ?left ?lType ?right ?rType (count(?mid) as ?pos)
+        WHERE {
+        ?expr rdf:type ?exprType .
+	?expr c:hasLeftOperand ?left .
+	?left rdf:type ?lType .
+	{	
+	?expr c:hasRightOperand ?right .
+	?right rdf:type ?rType .
+	FILTER(?rType != c:Value) .
+	}
+	UNION
+	{
+	?expr c:hasRightOperand ?right2 .
+	?right2 rdf:type ?rType .
+	?right2 c:hasValue ?right .
+	FILTER(?rType = c:Value) .
+	}
+	?expr c:hasParent* ?mid .
+	?mid c:hasParent* ?o . 
+	FILTER(?lType != c:Lvalue &amp;&amp; ?rType != c:Lvalue).
+	}
+	group by ?expr ?exprType ?left ?lType ?right ?rType ?o
+	order by ?pos
+    </query>
+
+ <query id="arithmeticExpression_backup">
+        SELECT ?expr ?exprType ?left ?lType ?right ?rType (count(?mid) as ?pos)
+        WHERE {
+        ?expr rdf:type ?exprType .
+	?expr c:hasLeftOperand ?left .
+	?left rdf:type ?lType .
+	{
+	?expr c:hasRightOperand ?right .
+	?right rdf:type ?rType .
+	}
+	UNION
+	{
+	?expr c:hasRightOperand ?right2 .
+	?right2 rdf:type c:Value .
+	?right2 c:hasValue ?right .
+	}
+	?expr c:hasParent* ?mid .
+	?mid c:hasParent* ?o . 
+	FILTER(?lType != c:Lvalue &amp;&amp; ?rType != c:Lvalue &amp;&amp; ?rType != c:Value).
+	BIND (if(!bound(?rType2),c:Value,?rType2) as ?rType) .
+	}
+	group by ?expr ?exprType ?left ?lType ?right ?rType ?o
+	order by ?pos
+    </query>
+  
+   
+    
+    
+</queries>

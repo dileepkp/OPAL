@@ -1,0 +1,6 @@
+@prefix drc: <http://www.codesupreme.com/#> . 
+
+drc:marla drc:loves drc:rollo .
+drc:1 drc:11 drc:111 .
+drc:2 drc:22 drc:222 .
+

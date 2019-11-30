@@ -1,0 +1,404 @@
+
+# Skip IP call with no parameters; func()
+[rule:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?func),		
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+		(?func c:hasArgumentExpr ?y),
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		
+->
+#		print('Skip IP call- not file type -no assignment - no parameters file type', ?exp),
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?exp,?cond,?iter,?baseConditions))
+]
+
+
+
+# Skip IP call with no file parameters; func(a,b) no fp
+[SkipIPCall:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?func),		
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef)
+		(?call c:hasName ?funcName)
+
+		(?callee rdf:type c:FunctionDecl)
+		(?callee c:hasName ?funcName )
+		
+		(?func c:hasArgumentExpr ?y)
+		(?y c:NthArg ?argPos)
+#		(?y c:referTo ?var)
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+		
+->
+		remove(0)
+#		print('Skip IP call with no file parameters', 'exp', ?exp),
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?exp,?cond,?iter,?baseConditions))
+]
+
+
+
+# ch = Skip IP call with no file parameters; ch = func(a,b) no fp
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?func )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+
+		(?func c:hasArgumentExpr ?y),
+		(?y c:NthArg ?argPos),
+#		(?y c:referTo ?var)
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('Skip IP call assignment with no file parameters', 'st', ?st),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# ch = Skip IP call with no file parameters; ch = func(a,b) no fp
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?hro)
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+		(?hro c:hasOperand ?func)
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+
+		(?func c:hasArgumentExpr ?y),
+		(?y c:NthArg ?argPos),
+#		(?y c:referTo ?var)
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('Skip IP call assignment with no file parameters', 'st', ?st),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+
+
+
+
+
+# ch = Skip IP call with no file parameters; int ch = func(a,b) no fp
+[fgetcCall:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:Variable) ,
+#		(?st c:hasBaseType c:unsigned_long)
+		(?st c:hasInitializer  ?z), 
+		(?z c:hasInitialValue  ?x), 
+		(?x rdf:type c:CastOp),
+		(?x c:hasOperand ?call),
+		(?call rdf:type c:FunctionCall),
+
+		(?call c:hasArgumentExpr ?y),
+		(?y c:NthArg ?argPos),
+#		(?y c:referTo ?var)
+		noValue(?y,c:hasBaseType,c:_IO_FILE)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('Skip IP call assignment with no file parameters; int ch = func(a,b) no fp', 'st', ?st),
+#		(1 1 updateVarList(?st,?baseConditions,?cond))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+
+# skip ch = func(...) 
+# ch not int; ch not file; func not in file library
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?func )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		noValue(?intDataTypeList, rdf:item, ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ', 'st', ?st),
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# skip ch = func(...) 
+# ch int; ch not file; func not in file library
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?func )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ch type int', 'st', ?st),
+		(1 1 makePS2(?var, ?pp, ?cond,"-32000"^^xsd:integer,pa:greaterEqual))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+# skip ch = func(...) 
+# ch int; ch not file; func not in file library; func has cast
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:ExpressionStatement )
+		(?st c:hasExpression ?expr )
+		(?expr rdf:type c:AssignOp )
+		(?expr c:hasLeftOperand ?left )
+		(?expr c:hasRightOperand ?right )
+		(?left rdf:type c:VariableRef )
+		(?left c:referTo ?var )
+		(?right c:hasOperand ?func)
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		(?var c:hasType ?dt)
+
+		(?intDataTypeList rdf:type pa:intDataTypeList)
+		(?intDataTypeList rdf:item ?dt)
+
+		noValue(?left,c:hasBaseType,c:_IO_FILE)
+
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+->
+#		print('skip ch = func(...) ch type int,func has cast', 'st', ?st),
+		(1 1 makePS2(?var, ?pp, ?cond,pa:unknown, pa:equals))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+]
+
+
+
+
+# A function call (not in file library) whose declaration is known and one of the parameters is of file type (not const)
+[IPCall:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?func),		
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+		(?func c:hasArgumentExpr ?y),
+		(?y c:NthArg ?argPos),
+		(?y c:referTo ?var)
+		(?y c:hasBaseType c:_IO_FILE)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+		(?callee rdf:type c:FunctionDecl)
+		noValue(?callee,c:hasDefinition,?funcBody )
+		(?callee c:hasName ?funcName )
+		(?callee c:hasParameter ?parameter )
+		(?parameter c:NthPara ?argPos )
+		(?parameter rdf:type c:Variable )
+		(?parameter c:hasBaseType c:_IO_FILE )
+		noValue(?parameter,c:hasType,c:const )
+		
+->
+#		print('IP call a parameter of file type', ?exp),
+		(1 1 makePS2(?var, ?pp, ?cond,"0"^^xsd:integer, pa:equals))
+# we are positive in using 0
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?var,?iter,?iter))
+		(1 1 completed(?exp,?cond,?iter,?baseConditions))
+]
+
+
+# A function call (not in file library) whose declaration is known and one of the parameters is of const file type
+[IPCall:
+		(1 1 execute(?prev,?exp,?cond,?pp)),
+		(?exp rdf:type c:ExpressionStatement),
+		(?exp c:hasExpression ?func),		
+		(?func rdf:type c:FunctionCall),
+		(?func c:call ?call),
+		(?call rdf:type c:FunctionRef),
+		(?call c:hasName ?funcName),
+		
+		noValue(?handledFunctions, pa:hasFunction, ?funcName)		
+		(?handledFunctions rdf:type pa:FileLibrary)
+
+		(?func c:hasArgumentExpr ?y),
+		(?y c:NthArg ?argPos),
+		(?y c:hasOperand ?op)
+		(?op c:referTo ?var)
+		(?y c:hasBaseType c:_IO_FILE)
+		
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+		(?callee rdf:type c:FunctionDecl)
+		noValue(?callee,c:hasDefinition,?funcBody )
+		(?callee c:hasName ?funcName )
+		(?callee c:hasParameter ?parameter )
+		(?parameter c:NthPara ?argPos )
+		(?parameter rdf:type c:Variable )
+		(?parameter c:hasBaseType c:_IO_FILE )
+		(?parameter c:hasType c:const )
+		
+->
+#		print('IP call a parameter of const file type', ?exp),
+#		(1 1 makePS2(?var, ?pp, ?cond,pa:unknown, pa:equals))
+		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,1,?iter,?iter))
+		(1 1 completed(?exp,?cond,?iter,?baseConditions))
+]
+
+
+
+
+
+
+#A pointer file variable declaration without assignment (in pointerRules.txt)
+[rule:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st rdf:type c:Variable),
+		noValue(?st,c:hasInitializer),
+		noValue(?st,pa:tempStateValue),
+		(?st c:hasType c:pointer_type)
+		(?st c:hasBaseType c:_IO_FILE)
+		(?pp pa:baseConditions ?baseConditions)
+		(?pp pa:iteration ?iter)
+->
+
+		(1 1 updateVarList(?st,?baseConditions,?cond))
+		(1 1 makePS2(?st , ?pp, ?cond,pa:unknown,pa:equals))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?st,?iter,?iter))
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+#		print('FILE fp pointer;')
+
+
+]
+
+
+
+
+
+# Assignment Statement fp1 = fp2
+[forInitStatement:
+		(1 1 execute(?prev,?st,?cond,?pp)),
+		(?st c:hasExpression ?expr),
+		(?expr rdf:type c:AssignOp),
+		(?expr c:hasLeftOperand ?left),
+		(?expr c:hasRightOperand ?right),
+		(?left c:referTo ?var),
+		(?right c:referTo ?var2),
+		(?left c:hasBaseType c:_IO_FILE)
+		(?right c:hasBaseType c:_IO_FILE)
+# in the above two clauses, we can use var and var2 also, no problem
+
+		(?var2 pa:hasPointerState ?ps),
+		(?ps pa:atProgramPoint ?prevPP),
+		(?ps pa:pointsToResource ?resource)
+		(?ps pa:stateValue ?stateVal),
+		(?ps pa:stateRelation ?stateRel),
+		(?prevPP pa:afterStatement ?prev)
+		(?prevPP pa:iteration ?iter)
+
+		(?pp pa:iteration ?iter)
+		(?pp pa:baseConditions ?baseConditions)
+
+		
+->
+#		(?var pa:hasPointerState ?ps)
+
+		(1 1 updateVarList(?var,?baseConditions,?cond))
+#need above one for global variables. nothing harm in invoking the above clause
+		(1 1 makeFilePS(?var , ?pp, ?cond,?stateVal,?stateRel,?resource))
+#		print('file Assignment Statement type fp1 = fp2;'),
+		(1 1 completed(?st,?cond,?iter,?baseConditions))
+		(1 1 updateOtherVar(?prev,?st,?cond,?pp,?var,?iter,?iter))
+]
+

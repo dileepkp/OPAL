@@ -1,0 +1,53 @@
+pa:queryList pa:contains pa:0_0 .
+pa:0_0 rdf:type pa:query .
+pa:0_0 pa:queryType pa:EnumQuery.
+pa:0_0 pa:programPointSettings pa:preCall .
+pa:0_0 pa:queryModel pa:SPARQL .
+pa:0_0 pa:hasQuery pa:0_2 .
+pa:0_2 pa:value ''' select  ?st 
+where {
+?st a <c#ForStatement>.
+?st <c#hasForTest> ?test .
+?st <c#hasForIncr> ?incr .
+
+{
+?st <c#hasForInit> ?init .
+?init <c#hasExpression> ?einit.
+?einit a <c#AssignOp>.
+?einit <c#hasLeftOperand> ?linit.
+?linit <c#referTo> ?initVar.
+}
+union
+{
+?st <c#hasForInit> ?initVar .
+}
+?test a <c#LeqOp>. 
+
+{?test <c#hasLeftOperand> ?optest}
+ union
+ {?test <c#hasRightOperand> ?optest}
+?optest <c#referTo> ?initVar.
+
+{
+?incr a <c#PostfixIncrementOp>.
+{?incr <c#hasOperand> ?op} 
+union
+ {?incr <c#hasLeftOperand> ?op}
+?op <c#referTo> ?initVar.
+}
+union
+{
+?incr a <c#AssignOp>.
+?incr <c#hasLeftOperand> ?op2.
+ ?op2 <c#referTo> ?initVar.
+?incr <c#hasRightOperand> ?rincr.
+ {?rincr a <c#AddOp>} 
+union
+ {?rincr a <c#SubOp>}
+ {?rincr <c#hasLeftOperand> ?opincr} 
+union
+ {?rincr  <c#hasRightOperand> ?opincr}
+ ?opincr <c#referTo> ?initVar.
+}
+
+}'''.

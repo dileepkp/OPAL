@@ -1,0 +1,65 @@
+select ?st 
+where {
+?st <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#ForStatement>.
+?st <c#hasForInit> ?init .
+?st <c#hasForTest> ?test .
+?st <c#hasForIncr> ?incr .
+{
+?init <c#hasExpression> ?einit.
+?einit <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#AssignOp>.
+?einit <c#hasLeftOperand> ?linit.
+?linit <c#referTo> ?initVar.
+}
+union
+{
+?ass <c#hasParent> ?initVar .
+?initVar <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#VariableDecl>.
+?ass <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#AssignInitializer> .
+}
+
+{?test <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#LessOp>} 
+union
+ {?test <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#GreaterOp>} 
+union
+ {?test <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#LeqOp>}
+union
+ {?test <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#GeqOp>}
+
+{?test <c#hasLeftOperand> ?optest}
+ union
+ {?test <c#hasRightOperand> ?optest}
+?optest <c#referTo> ?initVar.
+
+
+{
+
+{?incr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#PostfixIncrementOp>}
+ union
+ {?incr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#PostfixDecrementOp>}
+ union
+ {?incr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#AddAssignOp>}
+ union
+ {?incr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#SubAssignOp>}
+{?incr <c#hasOperand> ?op} 
+union
+ {?incr <c#hasLeftOperand> ?op}
+?op <c#referTo> ?initVar.
+}
+
+union
+
+{
+?incr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#AssignOp>.
+?incr <c#hasLeftOperand> ?op2.
+ ?op2 <c#referTo> ?initVar.
+?incr <c#hasRightOperand> ?rincr.
+ {?rincr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#AddOp>} 
+union
+ {?rincr <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <c#SubOp>}
+ {?rincr <c#hasLeftOperand> ?opincr} 
+union
+ {?rincr  <c#hasRightOperand> ?opincr}
+ ?opincr <c#referTo> ?initVar.
+}
+
+}

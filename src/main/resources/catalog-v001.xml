@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c/1.0.0" uri="c.owl"/>
+    <uri id="Imports Wizard Entry" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#" uri="http://www.w3.org/1999/02/22-rdf-syntax-ns"/>
+    <uri id="Imports Wizard Entry" name="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c/1.0.0" uri="c.owl"/>
+    <uri id="User Entered Import Resolution" name="http://www.openk.org/ontologies/c" uri="c.owl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1551353226680" name="duplicate:http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology" uri="PAOntology.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1551353226680" name="duplicate:http://www.semanticweb.org/aidb/ontologies/ProgramAnalysisOntology" uri="BugFindingOntology.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1551353226680" name="http://www.semanticweb.org/yzhao30/ontologies/2015/7/c" uri="c.owl"/>
+    </group>
+</catalog>
