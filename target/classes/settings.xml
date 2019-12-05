@@ -163,7 +163,7 @@
 
 
     <inputgroup>
-  <queryFile>src/main/resources/input/rdf3x/query_cg.sparql</queryFile>
+  <queryFile>src/main/resources/input/rdf3x/query_lu_formatted.sparql</queryFile>
     <input id="rdf3x_cg">
         <dataFile>src/main/resources/input/rdf3x/rose_cg_single.ttl</dataFile>
     </input>

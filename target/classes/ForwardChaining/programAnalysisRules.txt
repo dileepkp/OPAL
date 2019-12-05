@@ -15,6 +15,7 @@
 @include <ForwardChaining/varDeclRules.txt>.
 @include <ForwardChaining/skipRules.txt>.
 @include <ForwardChaining/cfgExitRules.txt>.
+# @include <ForwardChaining/domainRules.txt>.
 
 
 
@@ -397,7 +398,7 @@
 		(?pp pa:iteration ?iter)
 		(?pp pa:baseConditions ?baseConditions)
 ->
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?pp),
 		(1 1 completed(?var,?cond,?iter,?baseConditions))
 		(1 1 updateOtherVarCompleted(?var,?cond))
@@ -416,7 +417,7 @@
 		shouldValueBeNotConstant(?st, ?iter, ?loopSetting)
 
 ->
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?pp),
 		(?ps pa:stateValue ?stateVal),
 		(?ps pa:stateRelation ?stateRel),
@@ -437,7 +438,7 @@
 		shouldValueBeConstant(?st, ?iter, ?loopSetting)
 
 ->
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?pp),
 		(?ps pa:stateValue pa:constant1),
 		(?ps pa:stateRelation pa:equals),
@@ -447,7 +448,7 @@
 
 
 [makeFilePointerState:
-		(1 1 makeFilePS(?var, ?pp, ?cond,?stateVal, ?stateRel,?resource))
+		(1 1 makePointerPS(?var, ?pp, ?cond,?stateVal, ?stateRel,?resource))
 		makeTemp(?ps)
 		(?pp pa:iteration ?iter)
 		(?varList rdf:type pa:varList)
@@ -455,7 +456,7 @@
 
 #		noValue(1,1,updateVarList(?var,?baseConditions,?cond))
 ->
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:pointsToResource ?resource),
 		(?ps pa:atProgramPoint ?pp),
 		(?ps pa:stateValue ?stateVal),
@@ -474,7 +475,7 @@
 		(?varList rdf:item ?var)		
 #		noValue(1,1,updateVarList(?var,?baseConditions,?cond))
 ->
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?pp),
 		(?ps pa:stateValue ?stateVal),
 		(?ps pa:stateRelation ?stateRel),
@@ -517,13 +518,13 @@
 		(1 1 updateOtherVar(?prev,?next,?cond,?pp,?currVar,?prevIter,?iter)),
 #		noValue(1 1 makePS2(?currVar, ?pp, ?cond,?stateValx, ?stateRelx))
 #		noValue(1,1,updateVarList(?currVar,?baseConditions,?cond))
-#		noValue(1,1,makeFilePS(?currVar, ?pp, ?cond,?stateValy, ?stateRely,?resource))
+#		noValue(1,1,makePointerPS(?currVar, ?pp, ?cond,?stateValy, ?stateRely,?resource))
 
 		(?varList rdf:type pa:varList)
 		(?varList rdf:item ?currVar)		
 		(?varList pa:count ?c)
 
-		(?currVar pa:hasPointerState ?ps),
+		(?currVar pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?pp),
 
 
@@ -545,7 +546,7 @@
 		(1 1 updateOtherVar(?prev,?next,?cond,?pp,?currVar,?prevIter,?iter)),
 #		noValue(1 1 makePS2(?currVar, ?pp, ?cond,?stateValx, ?stateRelx))
 #		noValue(1,1,updateVarList(?currVar,?baseConditions,?cond))
-#		noValue(1,1,makeFilePS(?currVar, ?pp, ?cond,?stateValy, ?stateRely,?resource))
+#		noValue(1,1,makePointerPS(?currVar, ?pp, ?cond,?stateValy, ?stateRely,?resource))
 
 		(?varList rdf:type pa:varList)
 		(?varList pa:count ?c)

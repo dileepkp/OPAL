@@ -6,7 +6,7 @@
 package dileep.OPALFeature;
 
 //import BddPackage.ProgramMetaInformation;
-import Unused.ChunkManager;
+//import Unused.ChunkManager;
 import dileep.OPALFeature.base.QueryPointTriple;
 import com.microsoft.z3.BoolExpr;
 import com.microsoft.z3.Context;
@@ -332,9 +332,9 @@ public class Main {
     private static Model ForwardChain(Model rawModel,Statement func) {
 
         Model postRuleModel;
-        if(Settings.chunkingNeeded)
-            postRuleModel = Unused.ChunkTemp.processRules2(Settings.ruleFile, rawModel,func);
-        else
+       // if(Settings.chunkingNeeded)
+       //     postRuleModel = Unused.ChunkTemp.processRules2(Settings.ruleFile, rawModel,func);
+       // else
             postRuleModel = processRules(Settings.ruleFile, rawModel,func);
         register();
         return postRuleModel;

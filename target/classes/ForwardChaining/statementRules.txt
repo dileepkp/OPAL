@@ -76,7 +76,7 @@
 		(?varList rdf:item ?var)
 		(?varList pa:baseConditions ?baseConditions)
 
-		(?var pa:hasPointerState ?ps2)
+		(?var pa:hasState ?ps2)
 		(?ps2 pa:atProgramPoint ?prevPP)
 		(?prevPP pa:afterStatement ?prev)
 		(?prevPP pa:iteration ?iter3)
@@ -119,7 +119,7 @@
 		(?varList rdf:item ?var)
 		(?varList pa:baseConditions ?baseConditions)
 
-		(?var pa:hasPointerState ?ps2)
+		(?var pa:hasState ?ps2)
 		(?ps2 pa:atProgramPoint ?prevPP)
 		(?prevPP pa:afterStatement ?prev)
 		(?prevPP pa:iteration ?iter3)
@@ -164,7 +164,7 @@
 		(?varList rdf:item ?var)
 		(?varList pa:baseConditions ?baseConditions)
 
-		(?var pa:hasPointerState ?ps2)
+		(?var pa:hasState ?ps2)
 		(?ps2 pa:atProgramPoint ?prevPP)
 		(?prevPP pa:afterStatement ?prev)
 		(?prevPP pa:iteration ?iter3)
@@ -208,7 +208,7 @@
 		(?varList rdf:item ?var)
 		(?varList pa:baseConditions ?baseConditions)
 
-		(?var pa:hasPointerState ?ps2)
+		(?var pa:hasState ?ps2)
 		(?ps2 pa:atProgramPoint ?prevPP)
 		(?prevPP pa:afterStatement ?prev)
 		(?prevPP pa:iteration ?iter3)

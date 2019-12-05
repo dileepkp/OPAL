@@ -38,7 +38,7 @@ pa:1_3 pa:value ''' SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType)
 		?call rdf:type c:FunctionRef.
 		?call c:hasName 'fopen'.
 
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:atProgramPoint ?pp.
 		?pp pa:afterStatement ?expb4.
 		?expb4 pa:nextStatement ?exp.

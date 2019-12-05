@@ -31,7 +31,7 @@
 		(?y c:referTo ?var)
 		(?y c:hasBaseType c:_IO_FILE)
 		
-		(?var pa:hasPointerState ?ps),
+		(?var pa:hasState ?ps),
 		(?ps pa:atProgramPoint ?prevPP),
 		(?ps pa:stateValue ?stateVal),
 		(?ps pa:stateRelation  ?stateRel),
@@ -54,7 +54,7 @@
 
 		
 ->
-		(?parameter pa:hasPointerState ?ps)
+		(?parameter pa:hasState ?ps)
 
 		(100 100 100)		
 
@@ -300,7 +300,7 @@
 ->
 #		print('function calls with no parameters and handled-pointer return values', 'iter', ?iter),
 		processArguments(?func, ?pp)
-		(1 1 makeFilePS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?resource))
+		(1 1 makePointerPS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?resource))
 		(1 1 updateOtherVar(?prev,?st,?cond,?pp,1,?iter,?iter))
 		(1 1 completed(?st,?cond,?iter,?baseConditions))
 ]
@@ -422,7 +422,7 @@
 
 	
 #		print('function calls with handled-pointer return values', 'iter', ?iter),
-		(1 1 makeFilePS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?resource))
+		(1 1 makePointerPS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?resource))
 		processArguments(?func, ?pp)
 		(1 1 updateOtherVar(?prev,?var,?cond,?pp,1,?iter,?iter))
 		(1 1 completed(?var,?cond,?iter,?baseConditions))

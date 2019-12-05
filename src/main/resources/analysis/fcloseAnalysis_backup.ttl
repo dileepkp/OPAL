@@ -56,14 +56,14 @@ pa:1_3 pa:value ''' SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType)
 		?var rdf:type c:VariableDecl .
 		?var c:hasBaseType c:_IO_FILE .
 		?var c:hasParent* ?func .
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:pointsToResource ?res .
 		?ps pa:atProgramPoint/pa:afterStatement ?exp.
 		?var2 c:hasBaseType c:_IO_FILE .
 		MINUS{
 		?var2 c:hasScope ?scope.
 		?scope rdf:type c:Global .
-		?var2 pa:hasPointerState ?ps2 . 
+		?var2 pa:hasState ?ps2 . 
 		?ps2 pa:pointsToResource ?res . 
 		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
 }

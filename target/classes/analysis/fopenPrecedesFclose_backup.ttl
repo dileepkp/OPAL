@@ -25,7 +25,7 @@ pa:1_2 pa:value  ''' SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType)
 		?y c:NthArg '0'.
 		?y c:referTo ?var.
 
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:pointsToResource ?res .
 		?ps pa:atProgramPoint ?pp.
 		?pp pa:afterStatement ?expb4.
@@ -35,7 +35,7 @@ pa:1_2 pa:value  ''' SELECT DISTINCT ?exp ?var (c:VariableRef as ?varType)
 		MINUS{
 #                ?exp2 rdf:type c:ExpressionStatement.
 		?exp2 c:hasExpression/c:call/c:hasName 'fopen'.
-		?var pa:hasPointerState ?ps2 . 
+		?var pa:hasState ?ps2 . 
 		?ps2 pa:atProgramPoint ?pp2.
 		?pp2 pa:afterStatement ?exp2.
 		?ps2 pa:hasConditions ?cond2.

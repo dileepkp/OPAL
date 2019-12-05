@@ -27,7 +27,7 @@ pa:0_2 pa:value ''' SELECT DISTINCT ?exp
 		?y c:NthArg '0'.
 		?y c:referTo ?var.
 
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:atProgramPoint ?pp.
 		?pp pa:afterStatement ?expb4.
 		FILTER NOT EXISTS { ?ps pa:stateValue ?val. }

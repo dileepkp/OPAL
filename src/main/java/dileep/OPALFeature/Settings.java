@@ -56,8 +56,8 @@ public class Settings {
     static String intURI = "^^http://www.w3.org/2001/XMLSchema#integer";
     static String fileIRI;
     
-    static String analysisInput= "count";
-    static String settingsInput ="utilities";
+    static String analysisInput= "a1";
+    static String settingsInput ="sgfnode";
     
     
    //  static String executeFunction = "ftp:/home/demo/Dropbox/pato/tools/onto-build-rose/test/spec/feat.c#755_1_776_1";
@@ -65,8 +65,8 @@ public class Settings {
    static boolean useRdf3x = false;
     
    static boolean bddMode = false;
-    static Boolean forwardChainAndStop = false; // used for storign propagate agent result
-    static boolean forwardChainNeeded = false; 
+    static Boolean forwardChainAndStop = true; // used for storign propagate agent result
+    static boolean forwardChainNeeded = true; 
     static boolean forwardChainOnlyFclose = false;//perform forward chaining
     //only on the functions having fclose else perform on all functions
     

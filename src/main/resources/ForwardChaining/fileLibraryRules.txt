@@ -27,14 +27,14 @@
 		(?pp pa:baseConditions ?baseConditions)
 		(?pp pa:iteration ?iter)
 ->
-#		(?var pa:hasPointerState ?ps),
+#		(?var pa:hasState ?ps),
 #		(?ps pa:atProgramPoint ?pp),
 #		(?call pa:hasName  fl:fopen),
 #		(1 1 invoke(?var, ?pp, ?cond)),
 # function call is the resource
 
 		(1 1 updateVarList(?var,?baseConditions,?cond))
-		(1 1 makeFilePS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?func))
+		(1 1 makePointerPS(?var , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?func))
 		(1 1 updateOtherVar(?prev,?var,?cond,?pp,?var,?iter,?iter)),
 		(1 1 completed(?var,?cond,?iter,?baseConditions))
 #		print('file var declaration with fopen')
@@ -59,7 +59,7 @@
 		(?pp pa:iteration ?iter)
 		(?pp pa:baseConditions ?baseConditions)
 ->
-		(1 1 makeFilePS(?expRef , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?funcCall))
+		(1 1 makePointerPS(?expRef , ?pp, ?cond,"0"^^xsd:integer,pa:greaterEqual,?funcCall))
 
 		(1 1 updateOtherVar(?prev,?exp,?cond,?pp,?expRef,?iter,?iter)),
 		(1 1 completed(?exp,?cond,?iter,?baseConditions))
@@ -359,7 +359,7 @@
 		(?pp pa:iteration ?iter)
 		(?pp pa:baseConditions ?baseConditions)
 ->
-#		(?op pa:hasPointerState ?ps),
+#		(?op pa:hasState ?ps),
 #		(?ps pa:atProgramPoint ?pp),
 #		(?call pa:hasName  fl:fclose),
 #		(1 1 invoke(?exp, ?pp, ?cond)),

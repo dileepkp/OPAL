@@ -36,7 +36,7 @@
         WHERE {
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?st.
-         file0:375_3_375_13 pa:hasPointerState ?ps.
+         file0:375_3_375_13 pa:hasState ?ps.
          ?ps pa:stateValue ?val.
          ?ps pa:stateRelation ?rel.
         }
@@ -55,7 +55,7 @@
      <query id="4">
         SELECT ?ps 
         WHERE {
-         file0:416_3_416_13 pa:hasPointerState ?ps .
+         file0:416_3_416_13 pa:hasState ?ps .
         }
     </query>
    
@@ -65,7 +65,7 @@
         WHERE {
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement file0:787_3_788_29_exit.
-         file0:765_3_765_8 pa:hasPointerState ?ps.
+         file0:765_3_765_8 pa:hasState ?ps.
          ?pp pa:hasProgramConditions ?cond.
          ?cond (rdf:item)* ?temp.
          ?temp ?last ?o.
@@ -83,14 +83,14 @@
 		?var rdf:type c:VariableDecl .
 		?var c:hasBaseType c:_IO_FILE .
 		?var c:hasParent* ?func .
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:pointsToResource ?res .
 		?ps pa:atProgramPoint/pa:afterStatement ?exp.
 		?var2 c:hasBaseType c:_IO_FILE .
 		MINUS{
 		?var2 c:hasScope ?scope.
 		?scope rdf:type c:Global .
-		?var2 pa:hasPointerState ?ps2 . 
+		?var2 pa:hasState ?ps2 . 
 		?ps2 pa:pointsToResource ?res . 
 		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
 }
@@ -105,14 +105,14 @@
 		?var rdf:type c:VariableDecl .
 		?var c:hasBaseType c:_IO_FILE .
 		?var c:hasParent* ?func .
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:pointsToResource ?res .
 		?ps pa:atProgramPoint/pa:afterStatement ?exp.
 		?var2 c:hasBaseType c:_IO_FILE .
 		MINUS{
 		?var2 c:hasScope ?scope.
 		?scope rdf:type c:Global .
-		?var2 pa:hasPointerState ?ps2 . 
+		?var2 pa:hasState ?ps2 . 
 		?ps2 pa:pointsToResource ?res . 
 		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
 }
@@ -128,14 +128,14 @@
 		?var rdf:type c:VariableDecl .
 		?var c:hasBaseType c:_IO_FILE .
 		?var c:hasParent* ?func .
-		?var pa:hasPointerState ?ps . 
+		?var pa:hasState ?ps . 
 		?ps pa:pointsToResource ?res .
 		?ps pa:atProgramPoint/pa:afterStatement ?exp.
 		?var2 c:hasBaseType c:_IO_FILE .
 		MINUS{
 		?var2 c:hasScope ?scope.
 		?scope rdf:type c:Global .
-		?var2 pa:hasPointerState ?ps2 . 
+		?var2 pa:hasState ?ps2 . 
 		?ps2 pa:pointsToResource ?res . 
 		?ps2 pa:atProgramPoint/pa:afterStatement ?exp.
 }

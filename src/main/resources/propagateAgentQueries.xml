@@ -80,7 +80,7 @@
         SELECT ?qp ?var ?val ?relation ?pathId
         WHERE {
          ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp.
-         ?var pa:hasPointerState ?ps.
+         ?var pa:hasState ?ps.
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?st.
 	?pp pa:hasProgramConditions ?pathId.
@@ -94,7 +94,7 @@
         SELECT ?qp ?var ?val ?relation ?pathId ?ps
         WHERE {
        <!--  ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp. -->
-         ?var pa:hasPointerState ?ps.
+         ?var pa:hasState ?ps.
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?qp.
 	?pp pa:hasProgramConditions ?pathId.
@@ -127,7 +127,7 @@
         ?rval2 c:hasType ?dataType.
         FILTER((?op IN (c:EqualOp,c:LeqOp,c:NeqOp)) &amp;&amp; (?dataType IN (c:int))).
 
-<!--	?var pa:hasPointerState ?ps.
+<!--	?var pa:hasState ?ps.
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?exp. before or after ?exp doesnt matter-->
         }
@@ -159,14 +159,14 @@
        SELECT DISTINCT ?qp ?pathId (?cond as ?invalidCond) ?var (pa:preCall as ?queryLoc)
         WHERE {
          ?st (pa:nextFalseStatement|pa:nextTrueStatement|pa:nextStatement) ?qp.
-         ?var pa:hasPointerState ?ps.
+         ?var pa:hasState ?ps.
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?st.
 	?pp pa:hasProgramConditions ?pathId.
 	?pathId rdf:item* ?cond.
 	?stcond c:hasCondition ?cond.
 	
-	 ?var pa:hasPointerState ?ps2.
+	 ?var pa:hasState ?ps2.
          ?ps2 pa:atProgramPoint ?pp2.
          ?pp2 pa:afterStatement ?stcond.
 	FILTER(?ps != ?ps2)
@@ -185,14 +185,14 @@
        SELECT ?qp ?pathId (?cond as ?invalidCond) ?var (pa:postCall as ?queryLoc) 
         WHERE {
 
-         ?var pa:hasPointerState ?ps.
+         ?var pa:hasState ?ps.
          ?ps pa:atProgramPoint ?pp.
          ?pp pa:afterStatement ?qp.
 	?pp pa:hasProgramConditions ?pathId.
 	?pathId rdf:item* ?cond.
 	?stcond c:hasCondition ?cond.
 	
-	 ?var pa:hasPointerState ?ps2.
+	 ?var pa:hasState ?ps2.
          ?ps2 pa:atProgramPoint ?pp2.
          ?pp2 pa:afterStatement ?stcond.
 	FILTER(?ps != ?ps2)
