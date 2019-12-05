@@ -3,7 +3,8 @@ OPAL framework
 
 Use PATO framework to generate program triples for a c program. Please use our forked version of PATO framework.
 
-To create flow graph triples, run the following command in our forked version of PATO
+To create flow graph triples, run the following command in our forked version of PATO (folder: pato/projects/cfg):
+
 swipl --nosignals --quiet -s run.pl -- file.ttl is.c.txt > file_cfg.ttl
 
 To run propagate agent use Main.java in this project
